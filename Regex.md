@@ -13,7 +13,7 @@
 <div style="display: inline">(?:(?![a-zA-Z0-9._-]{1,}\@[a-zA-Z0-9_-]{1,}(?:\.(?:png|jpg|jpeg|pdf)){1,})[a-zA-Z0-9._-]{1,}\@[a-zA-Z0-9_-]{1,}(?:\.(?:[a-z]{1,})){1,})</div>
 
 ### **CDN detection** : 
-<div style="display: inline">https\:\/\/cdn\.[a-z.]{1,}\/</div>
+<div style="display: inline">https\:\/\/([a-z]{1,}\.){0,}[a-z]{0,}cdn\.[a-z]{1,}\/</div>
 
 ### **API detection** : 
 <div style="display: inline">(?![a-z]{1,}\.png)(api\.[a-z]{1,}\.[a-z]{1,}|([a-z]{1,}\.){0,}[a-z]{1,}api(s|)\.[a-z]{1,}|https:\/\/([a-z]{1,}\.){1,}[a-z]{1,}(\/[a-z]{1,}){1,}\/api\/)</div>
