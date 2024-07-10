@@ -1,7 +1,7 @@
 # Regex Detail
 
 ### **Sociel network detection** : 
-<div style="display: inline">(?!(https\:\/\/(connect|support)))(https\:\/\/[a-z,-]{1,}\.facebook\.[a-z]{1,}(\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}youtube\.[a-z]{1,}(?:\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}instagram\.[a-z]{1,}(\/[a-zA-Z0-9_.@-]{1,}){1,}|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]{1,}\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}|https\:\/\/[a-z-]{1,}\.linkedin\.[a-zA-Z0-9._-]{1,}(\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,}){1,}|https\:\/\/[a-z-]{1,}\.tiktok\.[a-zA-Z0-9._-]{1,}\/([a-zA-Z0-9-_.@]{1,}){1,}|https\:\/\/([a-z,-]\.){0,}github\.[a-z]{1,}(?:\/[a-zA-Z0-9-]{1,})|https\:\/\/([a-z,-]\.){0,}discord\.[a-z]{1,}(?:\/[a-zA-Z0-9]{1,}))</div>
+<div style="display: inline">(?!(https\:\/\/(connect|support|developers|about|www\.facebook\.com\/help)))(https\:\/\/[a-z,-]{1,}\.facebook\.[a-z]{1,}(\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}youtube\.[a-z]{1,}(?:\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}instagram\.[a-z]{1,}(\/[a-zA-Z0-9_.@-]{1,}){1,}|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]{1,}\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}|https\:\/\/[a-z-]{1,}\.linkedin\.[a-zA-Z0-9._-]{1,}(\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,}){1,}|https\:\/\/[a-z-]{1,}\.tiktok\.[a-zA-Z0-9._-]{1,}\/([a-zA-Z0-9-_.@]{1,}){1,}|https\:\/\/([a-z,-]\.){0,}github\.[a-z]{1,}(?:\/[a-zA-Z0-9-]{1,})|https\:\/\/([a-z,-]\.){0,}discord\.[a-z]{1,}(?:\/[a-zA-Z0-9]{1,}))</div>
 
 ### **Google IDs detection** : 
 <div style="display: inline">G\-[A-Z0-9]{10}|pub\-[0-9]{16}|UA\-[0-9-]{10,12}|GTM\-[0-9A-Z]{7}|AW\-[0-9A-Z]{16}</div>
