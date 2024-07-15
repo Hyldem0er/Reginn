@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECON</title>
+</head>
+<body>
+    <h3>Résultats de la Reconnaissance</h3>
+    <div id="telephone"></div>
+    <div id="social-medias"></div>
+    <div id="google-ids"></div>
+    <div id="emails"></div>
+    <div id="cdns"></div>
+    <div id="apis"></div>
+    <div id="wordpress"></div>
+    <div id="robots"></div>
+    <div id="sitemap"></div>
+
+    <script src="recon.js"></script>
+    <script>
+        // Appel de la fonction recon() définie dans recon.js
+        var results = recon();
+
+        // Affichage des résultats dans les éléments HTML correspondants
+        document.getElementById('telephone').textContent = results.phoneMatches;
+        document.getElementById('social-medias').textContent = results.socialMediaMatches;
+        document.getElementById('google-ids').textContent = results.googleIdsMatches;
+        document.getElementById('emails').textContent = results.emailMatches;
+        document.getElementById('cdns').textContent = results.cdnMatches;
+        document.getElementById('apis').textContent = results.apiMatches;
+        document.getElementById('wordpress').textContent = results.wordpressMatches.join(", ");
+        document.getElementById('robots').textContent = results.robotsMatches.join(", ");
+        document.getElementById('sitemap').textContent = results.sitemapMatches.join(", ");
+    </script>
+</body>
+</html>

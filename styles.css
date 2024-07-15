@@ -1,0 +1,40 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    width: 500px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style des onglets */
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style des boutons des onglets */
+.tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style du contenu des onglets */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
