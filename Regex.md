@@ -14,7 +14,7 @@
 (?![a-zA-Z0-9._-]{1,}\@[a-zA-Z0-9_-]{1,}(?:\.(?:png|jpg|jpeg|pdf)){1,})(?![a-zA-Z0-9._-]{1,}\@([a-zA-Z0-9_-]{1,}(\.(png|jpg|jpeg|pdf)){1,}|2x\.webp))([a-zA-Z0-9._-]{1,}(\@|(\(|\[)(at|TheSymbolWithaA)(\)|\]))[a-zA-Z0-9_-]{1,}(((\.|((\(|\[)dot(\)|\]))))([a-z]{2,})){1,})
 
 ### **CDN detection** : 
-<div style="display: inline">https\:\/\/([a-z]{1,}\.){0,}[a-z]{0,}cdn\.[a-z]{1,}(\.[a-z]{1,}){0,}\/</div>
+<div style="display: inline">([a-z\-]{1,}\.){0,}[a-z_-]{0,}cdn\.[a-z\-]{1,}(\.[a-z\-]{1,}){0,}</div>
 
 ### **API detection** : 
 <div style="display: inline">(?![a-z]{1,}\.png)(api\.[a-z]{1,}\.[a-z]{1,}|([a-z]{1,}\.){0,}[a-z]{1,}api(s|)\.[a-z]{1,}|https:\/\/([a-z]{1,}\.){1,}[a-z]{1,}(\/[a-z]{1,}){1,}\/api\/)</div>
