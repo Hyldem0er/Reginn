@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Reginn",
+    "version": "1.0",
+  
+    "description": "Une extension Firefox avec une interface à onglets..",
+    "permissions": ["tabs", "activeTab"],
+    "icons": {
+      "48": "icons/icon-48.png"
+    },
+
+    "browser_action": {
+        "default_icon": "icons/icon-48.png",
+        "default_title": "Reginn",
+        "default_popup": "popup.html"
+      }
+  }
