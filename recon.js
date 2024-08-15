@@ -17,9 +17,8 @@ function findMatches(content, regex,) {
     if (!content) {
         return new Set();
     }
-    // const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"']/g, ''));
-    const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"']|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g, ''));
-
+    // Clean les numéros de téléphones avant le set pour ne pas avoir des doublons type tel:123456789, 123456789, avec et sans espace etc...
+    const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"'\r\n]|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g, ''));
     return new Set(matches);
 }
 
@@ -45,42 +44,42 @@ function analyzeHtml(htmlContent) {
     if (phoneMatches.size > 1){
         displayMatches('Phones :', phoneMatches);
     }
-    else if (phoneMatches.size = 1){
+    else if (phoneMatches.size === 1){
         displayMatches('Phone :', phoneMatches);
     }
 
     if (socialMediaMatches.size > 1){
         displayMatches('Social Medias :', socialMediaMatches);
     }
-    else if (socialMediaMatches.size = 1){
+    else if (socialMediaMatches.size === 1){
         displayMatches('Social Media :', socialMediaMatches);
     }
 
     if (googleIdsMatches.size > 1){
         displayMatches('Google IDs :', googleIdsMatches);
     }
-    else if (googleIdsMatches.size = 1){
+    else if (googleIdsMatches.size === 1){
         displayMatches('Google ID :', googleIdsMatches);
     }
 
     if (emailMatches.size > 1){
         displayMatches('Emails :', emailMatches);
     }
-    else if (emailMatches.size = 1){
+    else if (emailMatches.size === 1){
         displayMatches('Email :', emailMatches);
     }
 
     if (cdnMatches.size > 1){
         displayMatches('CDNs :', cdnMatches);
     }
-    else if (cdnMatches.size = 1){
+    else if (cdnMatches.size === 1){
         displayMatches('CDN :', cdnMatches);
     }cdnMatches
 
     if (apiMatches.size > 1){
         displayMatches('APIs :', apiMatches);
     }
-    else if (apiMatches.size = 1){
+    else if (apiMatches.size === 1){
         displayMatches('API :', apiMatches);
     }cdnMatches
 
@@ -94,8 +93,6 @@ function analyzeHtml(htmlContent) {
     const sitemap2 = pageUrl + '/sitemap_index.xml';
     displayMatches('Robots :', [robots]);
     displayMatches('Sitemaps :', [sitemap1, sitemap2]);
-
-
 
     const cert = 'https://crt.sh/?q=' + cleanedDomain;
     displayMatches('Certificat :', [cert]);
@@ -188,4 +185,3 @@ function getDomain(url) {
         return null;
     }
 }
-
