@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Reginn</title>
+    <title>REGINN</title>
     <link rel="stylesheet" href="styles.css"/>
   </head>
+  <body>
+    <div class="header">
+      <img src="icons/icon-48.png" alt="Icone" class="header-icon">
+      <span>R E G I N N</span>
+    </div>
+    <div id="popup-content">
+      <button id="recon-button" class="focus">RECON</button>
+      <button id="seo-button">SEO</button>
+      <br><br><br><br><br>
+    </div>
+    <div id="recon-content">
 
-<body>
-  <div id="popup-content">
-    <button>Read Url </button>
-  </div>
-  <div id="error-content" class="hidden">
-    <p>Can't read url on this page</p><p>Try a different page.</p>
-  </div>
-  <script src="popup.js"></script>
-</body>
+    </div>
+    <div id="seo-content">
 
+    </div>
+    
+    <div id="error-content" class="hidden">
+      <p>Can't analyse this page</p>
+      <p>Try a different page.</p>
+    </div>
+    <script src="recon.js"></script>
+    <script src="seo.js"></script>
+  </body>
 </html>
