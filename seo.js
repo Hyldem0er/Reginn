@@ -126,26 +126,17 @@ function seo(htmlContent, urlDomain) {
 
 document.querySelector('#seo-button').addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const tabId = tabs[0].id;
-        const currentUrl = tabs[0].url;
-
-        chrome.scripting.executeScript({
-            target: { tabId: tabId },
-            func: () => document.documentElement.outerHTML
+        const currentTab = tabs[0];
+        const currentUrl = currentTab.url;
+    
+        chrome.tabs.executeScript({
+            code: 'document.documentElement.outerHTML'
         }, (results) => {
-            if (results && results[0] && results[0].result) {
-                const htmlContent = results[0].result;
-                document.getElementById('seo-content').innerHTML = '';
-                document.getElementById('recon-content').classList.add('hidden');
-                document.getElementById('seo-content').classList.remove('hidden');
-                seo(htmlContent, currentUrl);
-            } else {
-                document.getElementById('error-content').classList.remove('hidden');
-                document.getElementById('seo-content').classList.add('hidden');
-            }
+            const htmlContent = results[0];
+            document.getElementById('seo-content').innerHTML = '';
+            document.getElementById('recon-content').classList.add('hidden');
+            document.getElementById('seo-content').classList.remove('hidden');
+            seo(htmlContent, currentUrl);
         });
     });
 });
-
-
-
