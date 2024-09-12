@@ -3,7 +3,7 @@
     "name": "Reginn",
     "version": "1.0",
   
-    "description": "Une extension Firefox avec une interface à onglets..",
+    "description": "Simple OSINT tool to gather data from the source code of a website.",
     "permissions": ["tabs", "activeTab"],
     "icons": {
       "48": "icons/icon-48.png"

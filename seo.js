@@ -80,33 +80,6 @@ function backLinks(urlDomain){
     popupContent.appendChild(listElement);
 }
 
-// function displayUrls(matches) {
-//     const popupContent = document.getElementById('seo-content');
-//     const titleElement = document.createElement('h2');
-//     titleElement.textContent = "Cutestats";
-//     popupContent.appendChild(titleElement);
-//     const listElement = document.createElement('ul');
-
-//     if (matches.size === 0) {
-//         const noMatchesElement = document.createElement('p');
-//         noMatchesElement.textContent = 'No matches found.';
-//         listElement.appendChild(noMatchesElement);
-//     } else {
-//         const listElement = document.createElement('ul');
-//         matches.forEach(match => {
-//             const listItem = document.createElement('li');
-//             const linkElement = document.createElement('a');
-//             url = 'https://www.cutestat.com/tag/' + match
-//             linkElement.href = url;
-//             linkElement.textContent = url;
-//             listItem.appendChild(linkElement);
-//             listElement.appendChild(listItem);
-//         });
-//     }
-//     popupContent.appendChild(listElement);
-
-// }
-
 function seo(htmlContent, urlDomain) {
     const parser = new DOMParser();
     const htmlDoc = parser.parseFromString(htmlContent, 'text/html');
@@ -121,7 +94,6 @@ function seo(htmlContent, urlDomain) {
     displayResult(uniqueMatches)
     analyseDomain(urlDomain)
     backLinks(urlDomain)
-    // displayUrls(uniqueMatches)
 }
 
 document.querySelector('#seo-button').addEventListener('click', () => {

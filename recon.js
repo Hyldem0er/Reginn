@@ -17,7 +17,7 @@ function findMatches(content, regex,) {
     if (!content) {
         return new Set();
     }
-    // Clean les numéros de téléphones avant le set pour ne pas avoir des doublons type tel:123456789, 123456789, avec et sans espace etc...
+   // Clean phone numbers before setting to avoid duplicates like tel:123456789, 123456789, with and without spaces, etc.
     const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"'\r\n]|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g, ''));
     return new Set(matches);
 }
@@ -32,8 +32,6 @@ function analyzeHtml(htmlContent) {
     let apiMatches = findMatches(htmlContent, regexAPI);
     const domain = getDomain(pageUrl);
     const cleanedDomain = domain.replace('www.', '');
-    
-    //TODO Il faudrait virer tous les "tel:" "TELEPHONE:" des phoneMatches avant de transformer la liste en set mais là je sais pô comment faire proprement
 
     for (const match of cdnMatches) {
         if (match.includes('adsrv.eacdn.com')) {
