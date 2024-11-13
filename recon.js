@@ -13,11 +13,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     pageUrl = urlSegments.slice(0, 3).join('/');
 });
 
-function findMatches(content, regex,) {
+function findMatches(content, regex) {
     if (!content) {
         return new Set();
     }
-   // Clean phone numbers before setting to avoid duplicates like tel:123456789, 123456789, with and without spaces, etc.
+    // Clean phone numbers before setting to avoid duplicates like tel:123456789, 123456789, with and without spaces, etc.
     const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"'\r\n]|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g, ''));
     return new Set(matches);
 }
@@ -98,15 +98,22 @@ function analyzeHtml(htmlContent) {
     const whois = 'https://www.whoxy.com/' + cleanedDomain + '#whois';
     displayMatches('Whois :', [whois]);
     
-    const archives = 'https://web.archive.org/web/*/' + domain;
+    const archives = 'https://web.archive.org/web/*/' + domain; // page ou on est
     displayMatches('Archives :', [archives]);
+
+    const siteDork = 'https://www.google.fr/search?q=site%3A' + cleanedDomain;
+    const stackoverflowDork = 'https://www.google.fr/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
+    const githubSearchCommits = 'https://github.com/search?q=' + cleanedDomain + "&type=commits";
+    const githubSearch = 'https://www.shodan.io/search?query=' + cleanedDomain;
+    const shodanSearch = 'https://searchcode.com/?q=' + cleanedDomain;
+    displayMatches('Dev Analysis :', [siteDork, stackoverflowDork, githubSearchCommits, githubSearch, shodanSearch]);
+
 }
 
 function matchHTTPEndpoint(testString, pattern) {
     const result = pattern.test(testString);
     return result;
 }
-
 
 function displayMatches(title, matches) {
     const popupContent = document.getElementById('recon-content');
