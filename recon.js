@@ -235,6 +235,8 @@ function displayDork(match, title){
 
     popupContent.appendChild(titleElement);
     popupContent.appendChild(dorkElement);
+    // Créer une fonction display dork qui va prendre 3 arguments(title, [matches], dork_text)
+    // avec la ligne à ajouter suivante linkElement.textContent = dork_text;
     displayMatches("Simple Mail", [simpleMail])
     displayMatches("Mail without domain", [noDomainMail])
     displayMatches("Domain only dorks", [filetypeDorkMail, searchMailWebsites])
