@@ -1,7 +1,7 @@
 let regexPhone = /(?<!viewbox=|viewBox=|values=|\d|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:)(?!(?:(?:\s)(?:(?:[0-9](?:\s|\-)){3,})(?:\s|)))(((\'|\"|\(|\>|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}((((0|\+)(\[|\()\d{1,3}(\]|\)))|0|(\+\s{0,1}\d{1,4}))(\s|-|\(){0,1})(\d(\s|-|\)){0,1}){9,10}(\'|\"|\)|\<|\s){1})|((?!((.)((\d(\s|\-)){3,})(\s|)))((\'|\"|\(|\>|\s|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}((((((\+)(\[|\(|)1(\]|\)|))|(\(|\[|)1(\)|\]|)|\+)(\s|-){0,1})(\d(\s|-){0,1}){10})|(\[|\(|)\d{3}(\]|\)|)(-|\s)\d{3}(-|\s)\d{3,4})(\'|\"|\)|\<|\s){1}))|((tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON:|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":")(\d(-|\s|)){6,12}(\'|\"|\)|\<|\s)))/g;
 let regexSocialMedia = /(?!(https\:\/\/((connect|support|developers|about|www\.(facebook|youtube)\.com\/(help|embed|settings))|((gits.|)github.com\/(features|enterprise|team|solutions|customer-stories|readme|topics|trending|collections|pricing|notifications|security))|ct\.pinterest.com)))(https\:\/\/[a-z,-]{1,}\.facebook\.[a-z]{1,}(\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}youtube\.[a-z]{1,}(\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}){1,}|https\:\/\/[a-z,-]{0,}\.{0,1}(instagram|pinterest|discord)\.[a-z]{1,}(\/[a-zA-Z0-9_.@-]{1,}){1,}|https\:\/\/github\.[a-z]{1,}(\/[a-zA-Z0-9_.-]{1,}){1,}|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]{1,}\/[a-zA-Z0-9:%_+.,#?!@&=-]{1,}|https\:\/\/[a-z-]{1,}\.linkedin\.[a-zA-Z0-9._-]{1,}(\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{1,}){1,})/g;
 let regexGoogleIds = /G\-[A-Z0-9]{10}|pub\-[0-9]{16}|UA\-[0-9-]{10,12}|GTM\-[0-9A-Z]{7}|AW\-[0-9A-Z]{16}/g;
-let regexEmail = /(?![a-zA-Z0-9._-]{1,}\@([a-zA-Z0-9_-]{1,}(\.(png|jpg|jpeg|pdf)){1,}|2x\.(webp|be)))([a-zA-Z0-9._-]{1,}(\@|(\(|\[|\s\(|\s\[)(at|a|TheSymbolWithaA)(\)|\]|\)\s|\]\s))[a-zA-Z0-9_-]{1,}(((\.|((\(|\[|\s\(|\s\[)dot(\)|\]|\)\s|\]\s))))([a-z]{2,})){1,})/g;
+let regexEmail = /(?![a-zA-Z0-9._-]{1,}\@([a-zA-Z0-9_-]{1,}(?:\.(?:png|jpg|jpeg|pdf|ingest\.[a-z]{1,3}\.sentry\.io|newrelic\.com|datadoghq\.com|loggly\.com|googleapis\.com)){1,}|2x\.webp))([a-zA-Z0-9._-]{1,}(\@|(\(|\[)(at|TheSymbolWithaA)(\)|\]))[a-zA-Z0-9_-]{1,}(((\.|((\(|\[)dot(\)|\]))))([a-z]{2,})){1,})/g;
 let regexCDN = /([a-z\-]{1,}\.){0,}[a-z_-]{0,}cdn\.[a-z\-]{1,}(\.[a-z\-]{1,}){0,}/g;
 let regexAPI = /(?![a-z]{1,}\.png)((api(s|))\.[a-z]+\.[a-z]+|([a-z]+\.){0,}[a-z]+api(s|)\.[a-z]+|https:\/\/([a-z]+\.)+[a-z]+(\/[a-z]+)+\/api\/)/g;
 let pageUrl = '';
@@ -182,6 +182,8 @@ function displayMatches(title, matches) {
     }
 }
 
+
+
 function displayMatchesWithFurtherInvestigation(title, matches) {
     const popupContent = document.getElementById('recon-content');
     const titleElement = document.createElement('h2');
@@ -199,7 +201,7 @@ function displayMatchesWithFurtherInvestigation(title, matches) {
             listItem.textContent = match;
 
             const furtherInvestigationButton = document.createElement('button');
-            furtherInvestigationButton.textContent = '😀';
+            furtherInvestigationButton.classList.add('further-investigation-button');
             furtherInvestigationButton.addEventListener('click', () => {
                 // Handle further investigation logic here
                 // Tant qu'il y a au moins un enfant
@@ -207,7 +209,7 @@ function displayMatchesWithFurtherInvestigation(title, matches) {
                     // On supprime le premier enfant
                     popupContent.removeChild(popupContent.firstChild);
                 }
-                displayDork(match, "Further investigation")
+                displayDork(match, "Further investigations on : "/*, suggestedLinks*/)
             });
 
             listItem.appendChild(furtherInvestigationButton);
@@ -221,9 +223,23 @@ function displayDork(match, title){
     const titleElement = document.createElement('h1');
     titleElement.textContent = title + "\n" + match;
     const dorkElement = document.createElement('h2');
-    dorkElement.textContent = "Suggested Links:"
+
+    const atDomain = match.split('@')[1]; // @mail.fr
+    const nameAt =  match.split('@')[0] + '@'; //john.doe@
+    const simpleMail = 'https://www.google.com/search?q=%22'+ match + '%22';
+    const noDomainMail = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22';
+    const filetypeDorkMail = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20filetype%3Apdf%C2%A0%20%7C%20filetype%3Adocx%C2%A0%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
+    const searchMailWebsites = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7Csite%3Aaeroleads.com';
+    const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%2'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + '%40orange.fr%22';
+    /* Display */
+
     popupContent.appendChild(titleElement);
     popupContent.appendChild(dorkElement);
+    displayMatches("Simple Mail", [simpleMail])
+    displayMatches("Mail without domain", [noDomainMail])
+    displayMatches("Domain only dorks", [filetypeDorkMail, searchMailWebsites])
+    displayMatches("Alternative domains", [altDomainMail])
+
 
 }
 

@@ -54,6 +54,12 @@ a:active {
     color: #7c2929;
 }
 
+h1 {
+    font-size: 18px;
+    color: #ffffff;
+
+}
+
 h2 {
     font-size: 16px;
     color: #cb4444;
@@ -194,4 +200,64 @@ h2 {
 
 .hidden {
     display: none;
+}
+
+.match-item {
+    display: flex; /* Utilisation de flexbox pour aligner les éléments en ligne */
+    align-items: center; /* Centre verticalement les éléments */
+    margin-bottom: 10px; /* Ajoute une marge en bas pour espacer les éléments */
+}
+
+.further-investigation-button {
+    background-color: #7c2929; /* Couleur de fond */
+    border: none; /* Pas de bordure */
+    color: white; /* Couleur du texte */
+    padding: 0; /* Pas d'espacement interne */
+    text-align: center; /* Alignement du texte */
+    display: inline-block; /* Affichage en ligne */
+    vertical-align: middle;
+    font-size: 16px; /* Taille de la police */
+    margin-left: 10px; /* Marge à gauche pour espacer le bouton du texte */
+    cursor: pointer; /* Curseur en forme de main */
+    border-radius: 50%; /* Bordures arrondies pour un bouton rond */
+    transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
+    width: 15px; /* Largeur du bouton */
+    height: 15px; /* Hauteur du bouton */
+    position: relative; /* Position relative pour les pseudo-éléments */
+}
+
+.further-investigation-button:hover {
+    background-color: #652222; /* Couleur de fond au survol */
+}
+
+.further-investigation-button::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.further-investigation-button::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 5px;
+    background-color: white;
+    position: absolute;
+    top: 75%; /* Ajuste la position verticale de la poignée */
+    left: 85%; /* Ajuste la position horizontale de la poignée */
+    transform: rotate(135deg);
+    transform-origin: center;
+    transition: transform 0.3s linear; /* Ajoute une transition pour l'animation */
+}
+
+
+.further-investigation-button:hover::after {
+    transform: rotate(60deg) translate(-9px, -7px); /* Fait pivoter la poignée à 90 degrés au survol */
 }
