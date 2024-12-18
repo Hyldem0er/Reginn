@@ -5,12 +5,16 @@ let regexEmail = /(?![a-zA-Z0-9._-]{1,}\@([a-zA-Z0-9_-]{1,}(?:\.(?:png|jpg|jpeg|
 let regexCDN = /([a-z\-]{1,}\.){0,}[a-z_-]{0,}cdn\.[a-z\-]{1,}(\.[a-z\-]{1,}){0,}/g;
 let regexAPI = /(?![a-z]{1,}\.png)((api(s|))\.[a-z]+\.[a-z]+|([a-z]+\.){0,}[a-z]+api(s|)\.[a-z]+|https:\/\/([a-z]+\.)+[a-z]+(\/[a-z]+)+\/api\/)/g;
 let pageUrl = '';
+let fullUrl = '';
 
 const httppattern = /http(s|)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+const googlePattern = /https:\/\/www\.google\.com\/search\?q=([^&]+)/;
+
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
     const urlSegments = tabs[0].url.split('/');
     pageUrl = urlSegments.slice(0, 3).join('/');
+    fullUrl = tabs[0].url;
 });
 
 function findMatches(content, regex) {
@@ -46,8 +50,10 @@ function parseDomain(cleanURL) {
     const lastDotIndex = domainWithSubdomains.lastIndexOf(".");
     const domain = domainWithSubdomains.slice(lastDotIndex + 1);
     const subDomain = domainWithSubdomains.slice(0, lastDotIndex);
+    const tldDomain = domain + detectedTld;
 
-    return domain
+    return tldDomain
+    //return domain
 
 }
 
@@ -59,8 +65,11 @@ function analyzeHtml(htmlContent) {
     let cdnMatches = findMatches(htmlContent, regexCDN);
     let apiMatches = findMatches(htmlContent, regexAPI);
     const domain = getDomain(pageUrl);
-    const cleanedDomain = domain.replace('www.', '');
-    const domainName = parseDomain(domain)
+    //const cleanedDomain = domain.replace('www.', '');
+    //const domainName = parseDomain(domain)
+    const cleanedDomain = parseDomain(domain)
+    const tldPosition = cleanedDomain.lastIndexOf(".");
+    const domainName = cleanedDomain.slice(0, tldPosition);
 
     for (const match of cdnMatches) {
         if (match.includes('adsrv.eacdn.com')) {
@@ -69,14 +78,14 @@ function analyzeHtml(htmlContent) {
     }
 
     if (phoneMatches.size > 1){
-        displayMatches('Phones :', phoneMatches);
+        displayMatchesWithFurtherInvestigation('Phones (' + phoneMatches.size + ' matches) :'  , phoneMatches, 2);
     }
     else if (phoneMatches.size === 1){
-        displayMatches('Phone :', phoneMatches);
+        displayMatchesWithFurtherInvestigation('Phone :', phoneMatches, 2);
     }
 
     if (socialMediaMatches.size > 1){
-        displayMatches('Social Medias :', socialMediaMatches);
+        displayMatches('Social Medias (' + socialMediaMatches.size + ' matches) :', socialMediaMatches);
     }
     else if (socialMediaMatches.size === 1){
         displayMatches('Social Media :', socialMediaMatches);
@@ -90,10 +99,10 @@ function analyzeHtml(htmlContent) {
     }
 
     if (emailMatches.size > 1){
-        displayMatchesWithFurtherInvestigation('Emails :', emailMatches);
+        displayMatchesWithFurtherInvestigation('Emails (' + emailMatches.size + ' matches) :', emailMatches, 1);
     }
     else if (emailMatches.size === 1){
-        displayMatchesWithFurtherInvestigation('Email :', emailMatches);
+        displayMatchesWithFurtherInvestigation('Email :', emailMatches, 1);
     }
 
     if (cdnMatches.size > 1){
@@ -126,12 +135,19 @@ function analyzeHtml(htmlContent) {
 
     const whois = 'https://www.whoxy.com/' + cleanedDomain + '#whois';
     displayMatches('Whois :', [whois]);
-    
-    const archives = 'https://web.archive.org/web/*/' + domain; // page ou on est
+
+    const archives = 'https://web.archive.org/web/*/' + fullUrl; // page où on est --> fix, voir lignes 8-16
     displayMatches('Archives :', [archives]);
 
-    const siteDork = 'https://www.google.fr/search?q=site%3A' + cleanedDomain;
-    const stackoverflowDork = 'https://www.google.fr/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
+    // ajout de check de scams (à ajouter côté further investigations mail (mail fait) + tel)
+    const scamDomain = 'https://www.signal-arnaques.com/?q=' + cleanedDomain +'#search-container';
+    const scamDomainDork = 'https://www.google.com/search?q=%22' + cleanedDomain + '%22%20%22Scam%22';
+    const scamTrustPilot = 'https://www.trustpilot.com/review/' + cleanedDomain;
+    displayMatches('Scam :', [scamDomainDork,scamDomain,scamTrustPilot])
+
+
+    const siteDork = 'https://www.google.com/search?q=site%3A' + cleanedDomain;
+    const stackoverflowDork = 'https://www.google.com/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
     const githubSearchCommits = 'https://github.com/search?q=' + domainName + "&type=commits";
     const githubSearch = 'https://www.shodan.io/search?query=' + cleanedDomain;
     const shodanSearch = 'https://searchcode.com/?q=' + domainName;
@@ -158,7 +174,13 @@ function displayMatches(title, matches) {
         const listElement = document.createElement('ul');
         matches.forEach(match => {
             const listItem = document.createElement('li');
-            if (matchHTTPEndpoint(match, httppattern)) {
+            if (matchHTTPEndpoint(match, googlePattern)) {
+                const linkElement = document.createElement('a');
+                linkElement.href = match;
+                linkElement.textContent = "google.com : " + decodeURIComponent(match.replace("https:\/\/www\.google\.com\/search\?q=", ''));
+                listItem.appendChild(linkElement);
+            }
+            else if (matchHTTPEndpoint(match, httppattern)) {
                 const linkElement = document.createElement('a');
                 linkElement.href = match;
                 linkElement.textContent = match;
@@ -184,7 +206,7 @@ function displayMatches(title, matches) {
 
 
 
-function displayMatchesWithFurtherInvestigation(title, matches) {
+function displayMatchesWithFurtherInvestigation(title, matches, mode) {
     const popupContent = document.getElementById('recon-content');
     const titleElement = document.createElement('h2');
     titleElement.textContent = title;
@@ -209,7 +231,7 @@ function displayMatchesWithFurtherInvestigation(title, matches) {
                     // On supprime le premier enfant
                     popupContent.removeChild(popupContent.firstChild);
                 }
-                displayDork(match, "Further investigations on : "/*, suggestedLinks*/)
+                displayDork(match, "Further investigations on : ", mode)
             });
 
             listItem.appendChild(furtherInvestigationButton);
@@ -218,30 +240,41 @@ function displayMatchesWithFurtherInvestigation(title, matches) {
         popupContent.appendChild(listElement);
     }
 }
-function displayDork(match, title){
+function displayDork(match, title, mode){
     const popupContent = document.getElementById('recon-content');
     const titleElement = document.createElement('h1');
     titleElement.textContent = title + "\n" + match;
     const dorkElement = document.createElement('h2');
 
-    const atDomain = match.split('@')[1]; // @mail.fr
-    const nameAt =  match.split('@')[0] + '@'; //john.doe@
-    const simpleMail = 'https://www.google.com/search?q=%22'+ match + '%22';
-    const noDomainMail = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22';
-    const filetypeDorkMail = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20filetype%3Apdf%C2%A0%20%7C%20filetype%3Adocx%C2%A0%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
-    const searchMailWebsites = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7Csite%3Aaeroleads.com';
-    const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%2'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + '%40orange.fr%22';
-    /* Display */
-
     popupContent.appendChild(titleElement);
     popupContent.appendChild(dorkElement);
-    // Créer une fonction display dork qui va prendre 3 arguments(title, [matches], dork_text)
-    // avec la ligne à ajouter suivante linkElement.textContent = dork_text;
-    displayMatches("Simple Mail", [simpleMail])
-    displayMatches("Mail without domain", [noDomainMail])
-    displayMatches("Domain only dorks", [filetypeDorkMail, searchMailWebsites])
-    displayMatches("Alternative domains", [altDomainMail])
 
+    if (mode == 1){
+        const atDomain = encodeURIComponent(match.split('@')[1]); // @mail.fr
+        const nameAt = encodeURIComponent(match.split('@')[0] + '@'); //john.doe@
+        const simpleMail = 'https://www.google.com/search?q=%22'+ match + '%22';
+        const searchMailWebsites = 'https://www.google.com/search?q=%22'+ match + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
+        const noDomainMail = 'https://www.google.com/search?q=%22'+ nameAt + '%22';
+        const filetypeDorkMail = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
+        const searchDomainWebsites = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
+        const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%22'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + '%40orange.fr%22';
+        const scamMailDork = 'https://www.google.com/search?q=%22' + match + '%22%20%22Scam%22';
+
+        displayMatches("Simple Mail", [simpleMail, searchMailWebsites]);
+        displayMatches("Mail without domain", [noDomainMail]);
+        displayMatches("Domain only dorks", [filetypeDorkMail, searchDomainWebsites]);
+        displayMatches("Alternative domains", [altDomainMail]);
+        displayMatches("Scam", [scamMailDork]);
+    }
+    else if (mode == 2){
+        const reverseDirectory = 'https://www.pagesjaunes.fr/annuaireinverse/recherche?quoiqui=' + match + '&univers=annuaireinverse' 
+        const phoneInformations = 'https://whocalld.com/search?p=' + match
+        const phoneDork = 'https://www.google.com/search?q=%22' + match + '%22'
+
+
+        displayMatches("Reverse directory", [reverseDirectory])
+        displayMatches("Phone informations", [phoneInformations, phoneDork])
+    }
 
 }
 

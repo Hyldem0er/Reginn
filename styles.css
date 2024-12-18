@@ -25,6 +25,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    z-index: 1000;
 }
 
 body {
@@ -113,7 +114,8 @@ h2 {
     padding: 8px 16px; 
     font-size: 18px; 
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease 
+    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
+    z-index: 999;
 }
 
 #download {
@@ -130,7 +132,8 @@ h2 {
     padding: 8px 16px; 
     font-size: 18px; 
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease 
+    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease ;
+    z-index: 999;
 }
 
 
@@ -147,7 +150,8 @@ h2 {
     padding: 8px 16px; 
     font-size: 18px; 
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease 
+    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease; 
+    z-index: 999;
 }
 
 
@@ -164,7 +168,8 @@ h2 {
     padding: 8px 16px;
     font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;;
+    z-index: 999;
 }
 
 #recon-button:hover, #seo-button:hover, #add:hover, #download:hover {
@@ -203,31 +208,31 @@ h2 {
 }
 
 .match-item {
-    display: flex; /* Utilisation de flexbox pour aligner les éléments en ligne */
-    align-items: center; /* Centre verticalement les éléments */
-    margin-bottom: 10px; /* Ajoute une marge en bas pour espacer les éléments */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .further-investigation-button {
-    background-color: #7c2929; /* Couleur de fond */
-    border: none; /* Pas de bordure */
-    color: white; /* Couleur du texte */
-    padding: 0; /* Pas d'espacement interne */
-    text-align: center; /* Alignement du texte */
-    display: inline-block; /* Affichage en ligne */
+    background-color: #7c2929;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
     vertical-align: middle;
-    font-size: 16px; /* Taille de la police */
-    margin-left: 10px; /* Marge à gauche pour espacer le bouton du texte */
-    cursor: pointer; /* Curseur en forme de main */
-    border-radius: 50%; /* Bordures arrondies pour un bouton rond */
-    transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur de fond */
-    width: 15px; /* Largeur du bouton */
-    height: 15px; /* Hauteur du bouton */
-    position: relative; /* Position relative pour les pseudo-éléments */
+    font-size: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    width: 15px;
+    height: 15px;
+    position: relative;
+    z-index: 997;
 }
 
 .further-investigation-button:hover {
-    background-color: #652222; /* Couleur de fond au survol */
+    background-color: #652222;
 }
 
 .further-investigation-button::before {
@@ -250,14 +255,24 @@ h2 {
     height: 5px;
     background-color: white;
     position: absolute;
-    top: 75%; /* Ajuste la position verticale de la poignée */
-    left: 85%; /* Ajuste la position horizontale de la poignée */
+    top: 75%;
+    left: 85%;
     transform: rotate(135deg);
     transform-origin: center;
-    transition: transform 0.3s linear; /* Ajoute une transition pour l'animation */
+    transition: transform 0.3s linear;
 }
 
 
 .further-investigation-button:hover::after {
-    transform: rotate(60deg) translate(-9px, -7px); /* Fait pivoter la poignée à 90 degrés au survol */
+    transform: rotate(60deg) translate(-9px, -7px);
+}
+
+.background-band {
+    position: fixed;
+    top: 41px;
+    left: 0;
+    width: 100%;
+    height: 41px;
+    background-color: #242933;
+    z-index: 998;
 }
