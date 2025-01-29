@@ -28,7 +28,7 @@
     z-index: 1000;
 }
 
-body {
+body,html {
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     background-color: #242933;
@@ -36,10 +36,12 @@ body {
     width: 500px;
     margin: 0;
     padding: 0;
+    scrollbar-width: none;
 }
 
 p, li {
-    font-size: 14px; 
+    font-size: 14px;
+    color: #ffffff;
 }
 
 a:link {
@@ -47,12 +49,11 @@ a:link {
 }
 
 a:hover{
-    border-bottom: 1px solid;
-    background: #323947;
+    background: #7c2929;
 }
 
 a:active {
-    color: #7c2929;
+    color: #ff4d4d;
 }
 
 h1 {
@@ -67,44 +68,19 @@ h2 {
 
 }
 
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-  }
-  
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-  }
-  
-  .tab button:hover {
-    background-color: #ddd;
-  }
-  
-  .tab button.active {
-    background-color: #ccc;
-  }
-  
-  .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-  }
-
+h3 {
+    margin-left: 25px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #ffffff;
+}
 
 #add {
     position: fixed;
     top: 41px; 
     right: 50px; 
     width: 50px;
+    height: 41px;
     transform: translateX(0%); 
     background-color: #343a47; 
     color: #ffffff; 
@@ -114,6 +90,9 @@ h2 {
     padding: 8px 16px; 
     font-size: 18px; 
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;
     z-index: 999;
 }
@@ -122,7 +101,8 @@ h2 {
     position: fixed;
     top: 41px; 
     width: 50px;
-    right: 0px; 
+    right: 0px;
+    height: 41px;
     transform: translateX(0%); 
     background-color: #343a47; 
     color: #ffffff; 
@@ -132,14 +112,79 @@ h2 {
     padding: 8px 16px; 
     font-size: 18px; 
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease ;
     z-index: 999;
 }
 
+#add::before {
+    content: '';
+    position: absolute;
+    width: 70px;
+    top: 41px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #343a47;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#download::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    top: 41px;
+    left: 0%;
+    transform: translateX(-50%);
+    background-color: #343a47;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#add:hover::before {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    background-color: #424a5a;
+    content: 'Add to CSV';
+    opacity: 1;
+}
+
+#download:hover::before {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    background-color: #424a5a;
+    content: 'Download CSV';
+    opacity: 1;
+}
+
+
+#add:hover::after, #download:hover::after {
+    color: #555e72;
+    opacity: 1;
+}
+
+#add img, #download img {
+    width: 35px;
+    height: 35px;
+}
 
 #recon-button {
+    font-family: 'Norse', sans-serif;
     position: fixed;
-    top: 41px; 
+    top: 41px;
+    width: 88px; 
     left: 0px; 
     transform: translateX(0%); 
     background-color: #343a47; 
@@ -148,7 +193,7 @@ h2 {
     border-bottom: 4px solid #343a47; 
     border-radius: 0px; 
     padding: 8px 16px; 
-    font-size: 18px; 
+    font-size: 20px; 
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease; 
     z-index: 999;
@@ -156,9 +201,11 @@ h2 {
 
 
 #seo-button {
+    font-family: 'Norse', sans-serif;
     position: fixed;
     top: 41px;
     left: 88px;
+    width: 75px;
     transform: translateX(0%);
     background-color: #343a47;
     color: #ffffff;
@@ -166,7 +213,7 @@ h2 {
     border-bottom: 4px solid #343a47;
     border-radius: 0px;
     padding: 8px 16px;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease;;
     z-index: 999;
@@ -191,6 +238,22 @@ h2 {
 .header-icon {
     width: 30px;
     height: 30px;
+    margin-right: 8px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.add {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.download {
+    width: 20px;
+    height: 20px;
     margin-right: 8px;
     border-radius: 50%;
     object-fit: cover;
@@ -275,4 +338,20 @@ h2 {
     height: 41px;
     background-color: #242933;
     z-index: 998;
+}
+
+.open-all {
+    background-image: url('./icons/openall.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #00000000;
+    margin-left: 6px;
 }
