@@ -1,5 +1,5 @@
-# Reginn is now an [extension on firefox](https://addons.mozilla.org/fr/firefox/addon/hyldem0er_reginn/) !
-
+# Reginn is now an [extension on firefox 🦊](https://addons.mozilla.org/fr/firefox/addon/hyldem0er_reginn/) !
+## This tool is strictly reserved for educational or professional use only. 
 # Reginn
 - Create a bookmark called "Reginn" (or whatever you want but it'd be nice) in your browser.
 - Copy this code in the URL field :
