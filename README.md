@@ -15,6 +15,6 @@ javascript:(function(){var regex=/%28%3F%21%28https%5C%3A%5C%2F%5C%2F%28%28conne
 - click on the bookmark when you are on your beloved website
 
 *It is recommended to try it in the source code too (CTRL+U).*
-*If you're interested in the regexes used in this code, you'll find the details in the [regex.md](https://github.com/Hyldem0er/Reginn/blob/main/Regex.md) file.*
+*If you're interested in the regexes used in this code, you'll find the details in the [regex.md](https://github.com/Hyldem0er/Reginn/blob/main/regex.md) file.*
 
 Thanks to [OSINT Newsletter](https://github.com/The-OSINT-Newsletter) and its "bouncer" tool for the bookmark idea.
