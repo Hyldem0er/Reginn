@@ -10,15 +10,20 @@
       <img src="icons/icon-48.png" alt="Icone" class="header-icon">
       <span>R E G I N N</span>
     </div>
-    <div class="background-band"></div> <!-- ajoute le bandeau qui cache le texte entre les boutons -->
+    <div class="background-band"></div>
     <div id="popup-content">
-      <button id="recon-button">R E C O N</button>
-      <button id="seo-button">S E O</button>
-      <button id="add"><img src="icons/add.png" alt="Add"><!--+--></button>
-      <button id="download"><img src="icons/download.png" alt="Download"><!--↓--></button>
-      <button id="openall"><img src="icons/openall.png" alt="Open all"><!--O--></button>
+      <label id="recon-checkbox-label" class="custom-checkbox">
+          <input type="checkbox" id="recon-checkbox" checked>
+          <span class="checkbox-label">R E C O N</span>
+      </label>
+      <label id="seo-checkbox-label" class="custom-checkbox">
+          <input type="checkbox" id="seo-checkbox">
+          <span class="checkbox-label">S E O</span>
+      </label>
+      <button id="add"><img src="icons/add.png" alt="Add"></button>
+      <button id="download"><img src="icons/download.png" alt="Download"></button>
       <br><br><br><br><br>
-    </div>
+  </div>  
     <div id="recon-content"></div>
     <div id="seo-content"></div>
     <div id="error-content" class="hidden">
@@ -28,6 +33,5 @@
     <script src="recon.js"></script>
     <script src="seo.js"></script>
     <script src="csv.js"></script>
-    <script src="code.js"></script>
   </body>
 </html>

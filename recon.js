@@ -1,9 +1,13 @@
-let regexPhone = /(?<!viewbox=|viewBox=|values=|\d:"|\d\d:"|\d\d\d:"|\d\d\d\d:"|\d|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:)(?!(?:(?:\s)(?:(?:[0-9](?:\s|%20|\-)){3,})(?:\s|%20|)))(((\'|\"|\(|\>|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?<!viewbox=|viewBox=|values=|\d:"|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:)((((0|\+)(\d{0,3}|)( |)(\[|\()\d{1,3}(\]|\)))|0|(\+\s?\d{1,4}))(\s|-|\()?)(\d(\s|-|%20|\))?){8,10}(\'|\"|\)|\<|\s|%20){1})|((?!((.)((\d(\s|\-|%20)){3,})(\s|%20|)))((\'|\"|\(|\>|\s|%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}((((((\+)(\[|\(|)1(\]|\)|))|(\(|\[|)1(\)|\]|)|\+)(\s|-)?)(\d(\s|-)?){10})|(\[|\(|)\d{3}(\]|\)|)(-|\s|\%20)\d{3}(-|\s)\d{3,4})(\'|\"|\)|\<|\s){1}))|((tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON:|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":")(\d(-|\s|%20|)){6,12}(\'|\"|\)|\<|\s|\%20)))/g;
-let regexSocialMedia = /(?!(https\:\/\/((connect|support|developers|about|www\.(facebook|youtube)\.com\/(help|sharer|photo|recover|login|legal|hashtag|embed|settings))|((gits.|)(github.com||pinterest.com|twitter.com)\/(features|share|pin|enterprise|team|search|solutions|customer-stories|readme|topics|trending|collections|pricing|notifications|security|fluidicon))|(www\.instagram\.com\/p)|ct\.pinterest.com)))(https\:\/\/[a-z,-]+\.facebook\.[a-z]+(\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?@&=-]+)+|https\:\/\/[a-z,-]{0,}\.?youtube\.[a-z]+(\/[a-zA-Z0-9:%_+.,#?!@&=-]+)+|https\:\/\/[a-z,-]{0,}\.?(instagram|pinterest|discord)\.[a-z]+(\/[a-zA-Z0-9_.@-]+)+|https\:\/\/github\.[a-z]+(\/[a-zA-Z0-9_.-]+)+|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]+\/[a-zA-Z0-9:%_+.,#?!@&=-]+|https\:\/\/[a-z-]+\.linkedin\.[a-zA-Z0-9._-]+(\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+)/g;
+let regexPhone = /(?<!viewbox=|viewBox=|values=|\d:"|\d\d:"|\d\d\d:"|\d\d\d\d:"|\d|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:|background\:new|background="new|SIRET\s\:)(?!((\s)(([0-9](\s|%20|\-)){3,})(\s|%20|)))(((\'|\"|\(|\>|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?<!viewbox=|viewBox=|values=|\d:"|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:)((((0|\+)(\d{0,3}|)( |)(\[|\()\d{1,3}(\]|\)))|0|(\+\s?\d{1,4}))(\s|-|\()?)(\d(\s|-|%20|\))?){8,10}(\'|\"|\)|\<|\s|%20){1})|((?!((.)((\d(\s|\-|%20)){3,})(\s|%20|)))((\'|\"|\(|\>|\s|%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}((((((\+)(\[|\(|)1(\]|\)|))|(\(|\[|)1(\)|\]|)|\+)(\s|-)?)(\d(\s|-)?){10})|(\[|\(|)\d{3}(\]|\)|)(-|\s|\%20)\d{3}(-|\s)\d{3,4})(\'|\"|\)|\<|\s){1}))|((tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON:|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":")(\d(-|\s|%20|)){6,12}(\'|\"|\)|\<|\s|\%20)))(?! property="fb:pages")/g;
+let regexSocialMedia = /(?!((https?)\:\/\/((connect|support|developers|about|www\.(facebook|youtube)\.com\/(help|sharer|photo|recover|login|legal|hashtag|embed|settings))|((gits.|)(github.com||pinterest.com|twitter.com)\/(features|share|pin|enterprise|team|search|solutions|customer-stories|readme|topics|trending|collections|pricing|notifications|security|fluidicon))|(www\.instagram\.com\/p)|ct\.pinterest.com)))(https?\:\/\/([a-z,-]+\.)?facebook\.[a-z]+(\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?\/@&=-]+)+|https?\:\/\/([a-z,-]+\.)?youtube\.[a-z]+(\/[a-zA-Z0-9:%_+.,#?!@&=-]+)+|https?\:\/\/([a-z,-]+\.)?(instagram|pinterest|discord)\.[a-z]+(\/[a-zA-Z0-9_.@-]+)+|https\:\/\/github\.[a-z]+(\/[a-zA-Z0-9_.-]+)+|https?\:\/\/([a-z,-]+\.)?(twitter|x)\.[a-z]+\/[a-zA-Z0-9:%_+.,#?!@&=-]+|https?\:\/\/([a-z-]+\.)?linkedin\.[a-zA-Z0-9._-]+(\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+)/g;
 let regexGoogleIds = /G\-[A-Z0-9]{10}|pub\-[0-9]{16}|UA\-[0-9-]{10,12}|GTM\-[0-9A-Z]{7}|AW\-[0-9A-Z]{16}/g;
-let regexEmail = /(?![a-zA-Z0-9._-]+\@(sentry.io|([a-zA-Z0-9_-]{0,})(\.(png|jpg|jpeg|pdf|ingest|\w+\.png|\w+\.jpg|\w+\.jpeg|\w+\.pdf|\w+\.ingest\.[a-z]{1,3}\.sentry\.io|newrelic\.com|datadoghq\.com|loggly\.com|wixpress\.com|googleapis\.com))+|2x\.webp))([a-zA-Z0-9._-]+(\@|(\(|\[)(at|TheSymbolWithaA)(\)|\]))[a-zA-Z0-9_-]+(((\.|((\(|\[)dot(\)|\]))))([a-z]{2,}))+)/g;
+let regexEmail = /(?![a-zA-Z0-9._-]+\@(sentry.io|([a-zA-Z0-9_-]{0,})(\.(png|jpg|jpeg|pdf|ingest|\w+\.png|\w+\.jpg|\w+\.jpeg|\w+\.pdf|\w+\.ingest\.[a-z]{1,3}\.sentry\.io|newrelic\.com|datadoghq\.com|loggly\.com|wixpress\.com|googleapis\.com))+|2x\.webp))[\w.-]+(?:@|\[at\]|\(at\)|\[TheSymbolWithaA\]|\(TheSymbolWithaA\))[\w-]+(?:(?:\.|\(dot\)|\[dot\])[a-z]{2,})+/g;
 let regexCDN = /([a-z\-]+\.){0,}[a-z_-]{0,}cdn\.[a-z\-]+(\.[a-z\-]+){0,}/g;
 let regexAPI = /(?![a-z]+\.png)((api(s|))\.[a-z]+\.[a-z]+|([a-z]+\.){0,}[a-z]+api(s|)\.[a-z]+|https:\/\/([a-z]+\.)+[a-z]+(\/[a-z]+)+\/api\/)/g;
+let regexWayback = /https:\/\/web\.archive\.org\/web\/\d{14}\//g;
+let regexLocalhost = /http(s|):\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(:\d{1,4}|)\//g;
+let commentPattern = /(?<!https:|http:|src="|lazyload="|ref="|mp4="|reference="|webpack:|before{ )(\/\*{1,2}[\s\S]*?\*\/|\/{2}[\s\S][^\/]*?(\r\n|\r|\n|$)|<!--[\s\S]*?-->)/g;
+let regexIP = /(?<![\d-])(?<![a-zA-Z. ,]|version=")(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?!\d)(?![a-zA-Z])/gm;
 let pageUrl = '';
 let fullUrl = '';
 
@@ -11,10 +15,17 @@ const httppattern = /http(s|)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-
 const googlePattern = /https:\/\/www\.google\.com\/search\?q=([^&]+)/;
 
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    if (regexWayback.test(tabs[0].url)) {
+        tabs[0].url = tabs[0].url.replace(regexWayback, '');
+        // console.log(tabs[0].url);
+    }
     const urlSegments = tabs[0].url.split('/');
     pageUrl = urlSegments.slice(0, 3).join('/');
     fullUrl = tabs[0].url;
+    // console.log("Page URL:", pageUrl);
+    // console.log("Full URL:", fullUrl);
 });
+
 
 function githubUserFilter(socialMediaMatches) {
     const results = new Set();
@@ -45,17 +56,194 @@ function githubResultsOnly(socialMediaMatches) {
 }
 
 
+
 function findMatches(content, regex) {
     if (!content) {
         return new Set();
     }
+
+    // console.log('regex : ' + regex);
+
     // Clean phone numbers before setting to avoid duplicates like tel:123456789, 123456789, with and without spaces, etc.
-    const matches = Array.from(content.matchAll(regex)).map(match => match[0].replace(/[<>"'\r\n]| |%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":s"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g, ''));
-    const filteredMatches = matches.filter(number => !/^[01]+$/.test(number)); // clean phone numbers only composed of 1 and 0
-    return new Set(filteredMatches);
+    const cleanRegex = /[<>"'\r\n]| |%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon:|tel":"|tell":"|phone":"|telephone":"|telefon":s"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g;
+    const matches = new Set();
+
+    // Divide htmlContent into smaller parts
+    const partSize = 10000;
+    for (let i = 0; i < content.length; i += partSize) {
+        const chunk = content.slice(i, i + partSize);
+        const chunkMatches = Array.from(chunk.matchAll(regex)).map(match => match[0].replace(cleanRegex, ''));
+        const filteredChunkMatches = chunkMatches.filter(match => !/^[01]+$/.test(match));
+        filteredChunkMatches.forEach(match => matches.add(match));
+    }
+
+    // console.log(Array.from(matches));
+    return matches;
 }
 
+
+
 const tldToCountry = [
+    { tld: '.com.fr', code: '+33', country: 'France' },
+    { tld: '.com.paris', code: '+33', country: 'France' },
+    { tld: '.com.us', code: '+1', country: 'États-Unis' },
+    { tld: '.com.de', code: '+49', country: 'Allemagne' },
+    { tld: '.com.uk', code: '+44', country: 'Royaume-Uni' },
+    { tld: '.com.co.uk', code: '+44', country: 'Royaume-Uni' },
+    { tld: '.com.ca', code: '+1', country: 'Canada' },
+    { tld: '.com.es', code: '+34', country: 'Espagne' },
+    { tld: '.com.it', code: '+39', country: 'Italie' },
+    { tld: '.com.jp', code: '+81', country: 'Japon' },
+    { tld: '.com.cn', code: '+86', country: 'Chine' },
+    { tld: '.com.au', code: '+61', country: 'Australie' },
+    { tld: '.com.br', code: '+55', country: 'Brésil' },
+    { tld: '.com.in', code: '+91', country: 'Inde' },
+    { tld: '.com.ru', code: '+7', country: 'Russie' },
+    { tld: '.com.mx', code: '+52', country: 'Mexique' },
+    { tld: '.com.nl', code: '+31', country: 'Pays-Bas' },
+    { tld: '.com.se', code: '+46', country: 'Suède' },
+    { tld: '.com.no', code: '+47', country: 'Norvège' },
+    { tld: '.com.fi', code: '+358', country: 'Finlande' },
+    { tld: '.com.dk', code: '+45', country: 'Danemark' },
+    { tld: '.com.pl', code: '+48', country: 'Pologne' },
+    { tld: '.com.pt', code: '+351', country: 'Portugal' },
+    { tld: '.com.ch', code: '+41', country: 'Suisse' },
+    { tld: '.com.at', code: '+43', country: 'Autriche' },
+    { tld: '.com.be', code: '+32', country: 'Belgique' },
+    { tld: '.com.hk', code: '+852', country: 'Hong Kong' },
+    { tld: '.com.sg', code: '+65', country: 'Singapour' },
+    { tld: '.com.kr', code: '+82', country: 'Corée du Sud' },
+    { tld: '.com.za', code: '+27', country: 'Afrique du Sud' },
+    { tld: '.com.ae', code: '+971', country: 'Émirats Arabes Unis' },
+    { tld: '.com.cl', code: '+56', country: 'Chili' },
+    { tld: '.com.ar', code: '+54', country: 'Argentine' },
+    { tld: '.com.co', code: '+57', country: 'Colombie' },
+    { tld: '.com.my', code: '+60', country: 'Malaisie' },
+    { tld: '.com.th', code: '+66', country: 'Thaïlande' },
+    { tld: '.com.tw', code: '+886', country: 'Taïwan' },
+    { tld: '.com.vn', code: '+84', country: 'Vietnam' },
+    { tld: '.com.ng', code: '+234', country: 'Nigéria' },
+    { tld: '.com.ke', code: '+254', country: 'Kenya' },
+    { tld: '.com.ph', code: '+63', country: 'Philippines' },
+    { tld: '.com.ie', code: '+353', country: 'Irlande' },
+    { tld: '.com.is', code: '+354', country: 'Islande' },
+    { tld: '.com.lt', code: '+370', country: 'Lituanie' },
+    { tld: '.com.lv', code: '+371', country: 'Lettonie' },
+    { tld: '.com.ee', code: '+372', country: 'Estonie' },
+    { tld: '.com.si', code: '+386', country: 'Slovénie' },
+    { tld: '.com.sk', code: '+421', country: 'Slovaquie' },
+    { tld: '.com.hr', code: '+385', country: 'Croatie' },
+    { tld: '.com.bg', code: '+359', country: 'Bulgarie' },
+    { tld: '.com.ro', code: '+40', country: 'Roumanie' },
+    { tld: '.com.by', code: '+375', country: 'Biélorussie' },
+    { tld: '.com.ua', code: '+380', country: 'Ukraine' },
+    { tld: '.com.rs', code: '+381', country: 'Serbie' },
+    { tld: '.com.ba', code: '+387', country: 'Bosnie-Herzégovine' },
+    { tld: '.com.mk', code: '+389', country: 'Macédoine du Nord' },
+    { tld: '.com.mt', code: '+356', country: 'Malte' },
+    { tld: '.com.lu', code: '+352', country: 'Luxembourg' },
+    { tld: '.com.cy', code: '+357', country: 'Chypre' },
+    { tld: '.com.gl', code: '+299', country: 'Groenland' },
+    { tld: '.com.fo', code: '+298', country: 'Îles Féroé' },
+    { tld: '.com.as', code: '+1-684', country: 'Samoa américaines' },
+    { tld: '.com.gu', code: '+1-671', country: 'Guam' },
+    { tld: '.com.mp', code: '+1-670', country: 'Îles Mariannes du Nord' },
+    { tld: '.com.pr', code: '+1-787', country: 'Porto Rico' },
+    { tld: '.com.vi', code: '+1-340', country: 'Îles Vierges américaines' },
+    { tld: '.com.gr', code: '+30', country: 'Grèce' },
+    { tld: '.com.tr', code: '+90', country: 'Turquie' },
+    { tld: '.com.il', code: '+972', country: 'Israël' },
+    { tld: '.com.nz', code: '+64', country: 'Nouvelle-Zélande' },
+    { tld: '.com.pe', code: '+51', country: 'Pérou' },
+    { tld: '.com.ve', code: '+58', country: 'Venezuela' },
+    { tld: '.com.ec', code: '+593', country: 'Équateur' },
+    { tld: '.com.bo', code: '+591', country: 'Bolivie' },
+    { tld: '.com.py', code: '+595', country: 'Paraguay' },
+    { tld: '.com.uy', code: '+598', country: 'Uruguay' },
+    { tld: '.com.cu', code: '+53', country: 'Cuba' },
+    { tld: '.com.cr', code: '+506', country: 'Costa Rica' },
+    { tld: '.com.pa', code: '+507', country: 'Panama' },
+    { tld: '.com.ni', code: '+505', country: 'Nicaragua' },
+    { tld: '.com.hn', code: '+504', country: 'Honduras' },
+    { tld: '.com.gt', code: '+502', country: 'Guatemala' },
+    { tld: '.com.sv', code: '+503', country: 'El Salvador' },
+    { tld: '.com.do', code: '+1-809', country: 'République Dominicaine' },
+    { tld: '.com.ht', code: '+509', country: 'Haïti' },
+    { tld: '.com.jm', code: '+1-876', country: 'Jamaïque' },
+    { tld: '.com.tt', code: '+1-868', country: 'Trinité-et-Tobago' },
+    { tld: '.com.bs', code: '+1-242', country: 'Bahamas' },
+    { tld: '.com.bb', code: '+1-246', country: 'Barbade' },
+    { tld: '.com.gd', code: '+1-473', country: 'Grenade' },
+    { tld: '.com.vc', code: '+1-784', country: 'Saint-Vincent-et-les-Grenadines' },
+    { tld: '.com.lc', code: '+1-758', country: 'Sainte-Lucie' },
+    { tld: '.com.dm', code: '+1-767', country: 'Dominique' },
+    { tld: '.com.ag', code: '+1-268', country: 'Antigua-et-Barbuda' },
+    { tld: '.com.kn', code: '+1-869', country: 'Saint-Christophe-et-Niévès' },
+    { tld: '.com.bz', code: '+501', country: 'Belize' },
+    { tld: '.com.gy', code: '+592', country: 'Guyana' },
+    { tld: '.com.sr', code: '+597', country: 'Suriname' },
+    { tld: '.com.ma', code: '+212', country: 'Maroc' },
+    { tld: '.com.dz', code: '+213', country: 'Algérie' },
+    { tld: '.com.tn', code: '+216', country: 'Tunisie' },
+    { tld: '.com.eg', code: '+20', country: 'Égypte' },
+    { tld: '.com.ly', code: '+218', country: 'Libye' },
+    { tld: '.com.sd', code: '+249', country: 'Soudan' },
+    { tld: '.com.et', code: '+251', country: 'Éthiopie' },
+    { tld: '.com.kw', code: '+965', country: 'Koweït' },
+    { tld: '.com.qa', code: '+974', country: 'Qatar' },
+    { tld: '.com.bh', code: '+973', country: 'Bahreïn' },
+    { tld: '.com.om', code: '+968', country: 'Oman' },
+    { tld: '.com.ye', code: '+967', country: 'Yémen' },
+    { tld: '.com.iq', code: '+964', country: 'Irak' },
+    { tld: '.com.sy', code: '+963', country: 'Syrie' },
+    { tld: '.com.jo', code: '+962', country: 'Jordanie' },
+    { tld: '.com.lb', code: '+961', country: 'Liban' },
+    { tld: '.com.sa', code: '+966', country: 'Arabie Saoudite' },
+    { tld: '.com.ir', code: '+98', country: 'Iran' },
+    { tld: '.com.pk', code: '+92', country: 'Pakistan' },
+    { tld: '.com.bd', code: '+880', country: 'Bangladesh' },
+    { tld: '.com.lk', code: '+94', country: 'Sri Lanka' },
+    { tld: '.com.np', code: '+977', country: 'Népal' },
+    { tld: '.com.bt', code: '+975', country: 'Bhoutan' },
+    { tld: '.com.mm', code: '+95', country: 'Myanmar' },
+    { tld: '.com.kh', code: '+855', country: 'Cambodge' },
+    { tld: '.com.la', code: '+856', country: 'Laos' },
+    { tld: '.com.mn', code: '+976', country: 'Mongolie' },
+    { tld: '.com.kz', code: '+7', country: 'Kazakhstan' },
+    { tld: '.com.uz', code: '+998', country: 'Ouzbékistan' },
+    { tld: '.com.kg', code: '+996', country: 'Kirghizistan' },
+    { tld: '.com.tj', code: '+992', country: 'Tadjikistan' },
+    { tld: '.com.tm', code: '+993', country: 'Turkménistan' },
+    { tld: '.com.az', code: '+994', country: 'Azerbaïdjan' },
+    { tld: '.com.ge', code: '+995', country: 'Géorgie' },
+    { tld: '.com.am', code: '+374', country: 'Arménie' },
+    { tld: '.com.md', code: '+373', country: 'Moldavie' },
+    { tld: '.com.al', code: '+355', country: 'Albanie' },
+    { tld: '.com.me', code: '+382', country: 'Monténégro' },
+    { tld: '.com.xk', code: '+383', country: 'Kosovo' },
+    { tld: '.com.ad', code: '+376', country: 'Andorre' },
+    { tld: '.com.mc', code: '+377', country: 'Monaco' },
+    { tld: '.com.sm', code: '+378', country: 'Saint-Marin' },
+    { tld: '.com.va', code: '+379', country: 'Vatican' },
+    { tld: '.com.li', code: '+423', country: 'Liechtenstein' },
+    { tld: '.com.mh', code: '+692', country: 'Îles Marshall' },
+    { tld: '.com.fm', code: '+691', country: 'Micronésie' },
+    { tld: '.com.pw', code: '+680', country: 'Palau' },
+    { tld: '.com.nr', code: '+674', country: 'Nauru' },
+    { tld: '.com.ki', code: '+686', country: 'Kiribati' },
+    { tld: '.com.tv', code: '+688', country: 'Tuvalu' },
+    { tld: '.com.ws', code: '+685', country: 'Samoa' },
+    { tld: '.com.to', code: '+676', country: 'Tonga' },
+    { tld: '.com.vu', code: '+678', country: 'Vanuatu' },
+    { tld: '.com.sb', code: '+677', country: 'Îles Salomon' },
+    { tld: '.com.pg', code: '+675', country: 'Papouasie-Nouvelle-Guinée' },
+    { tld: '.com.fj', code: '+679', country: 'Fidji' },
+    { tld: '.com.ck', code: '+682', country: 'Îles Cook' },
+    { tld: '.com.nu', code: '+683', country: 'Niue' },
+    { tld: '.com.tk', code: '+690', country: 'Tokelau' },
+    { tld: '.com.wf', code: '+681', country: 'Wallis-et-Futuna' },
+    { tld: '.com.nc', code: '+687', country: 'Nouvelle-Calédonie' },
+    { tld: '.com.pf', code: '+689', country: 'Polynésie française' },
     { tld: '.fr', code: '+33', country: 'France' },
     { tld: '.paris', code: '+33', country: 'France' },
     { tld: '.us', code: '+1', country: 'États-Unis' },
@@ -247,17 +435,23 @@ function parseDomain(cleanURL) {
 }
 
 function analyzeHtml(htmlContent) {
+    
     let phoneMatches = findMatches(htmlContent, regexPhone);
     let socialMediaMatches = findMatches(htmlContent, regexSocialMedia);
     let googleIdsMatches = findMatches(htmlContent, regexGoogleIds);
     let emailMatches = findMatches(htmlContent, regexEmail);
     let cdnMatches = findMatches(htmlContent, regexCDN);
     let apiMatches = findMatches(htmlContent, regexAPI);
+    let ipMatches = findMatches(htmlContent, regexIP);
     const domain = getDomain(pageUrl); // www.domain.com
     const domainName = parseDomain(domain) // domain    
     const subDomain = (domain.replace(domainName, '').slice(0,(domain.replace(domainName, '')).indexOf('.'))); // www.
     const cleanedDomain = subDomain.length <= 1 ? domain : domain.replace(subDomain + '.', ''); // domain.com
-    const tld = cleanedDomain.replace(domainName, ''); // .com
+    const tld = cleanedDomain.replace(domainName, ''); // .co
+
+    if (regexLocalhost.test(htmlContent)) {
+        console.log("passe par là");
+    }
 
     for (const match of cdnMatches) {
         if (match.includes('adsrv.eacdn.com')) {
@@ -343,14 +537,14 @@ function analyzeHtml(htmlContent) {
         const wpDetect = pageUrl + '/wp-json/wp/v2/users';
         displayMatches('Site WordPress : ', [wpDetect]);
     }
-    
-    // // logs des différentes parties de l'URL 
-    // console.log('domain : ' + domain);
-    // console.log('subDomain : ' + subDomain);
-    // console.log('cleanedDomain : ' + cleanedDomain);
-    // console.log('domainName : ' + domainName)
-    // console.log('TLD : ' + tld)
 
+    if (ipMatches.size > 1){ 
+        displayMatches('IPs found on the page :', ipMatches);
+    }
+    else if (ipMatches.size === 1){
+        displayMatches('IP found on the page :', ipMatches);
+    }
+    
     const robots = pageUrl + '/robots.txt';
     const sitemap1 = pageUrl + '/sitemap.xml';
     const sitemap2 = pageUrl + '/sitemap_index.xml';
@@ -363,26 +557,40 @@ function analyzeHtml(htmlContent) {
     const whois = 'https://www.whoxy.com/' + cleanedDomain + '#whois';
     displayMatches('Whois :', [whois]);
 
-    const archives = 'https://web.archive.org/web/*/' + fullUrl; 
-    displayMatches('Archives :', [archives]);
+    const archives = 'https://web.archive.org/web/*/' + fullUrl;
+    const saveArchive = 'https://web.archive.org/save/';
+    displayMatches('Archives :', [archives, saveArchive]);
 
     const scamDomain = 'https://www.signal-arnaques.com/?q=' + cleanedDomain +'#search-container';
     const scamDomainDork = 'https://www.google.com/search?q=%22' + cleanedDomain + '%22%20%22Scam%22';
     const scamTrustPilot = 'https://www.trustpilot.com/review/' + cleanedDomain;
-    displayMatches('Scam :', [scamDomainDork,scamDomain,scamTrustPilot])
+    displayMatches('Scams :', [scamDomainDork,scamDomain,scamTrustPilot])
 
 
     const siteDork = 'https://www.google.com/search?q=site%3A' + cleanedDomain;
     const stackoverflowDork = 'https://www.google.com/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
     const githubSearchCommits = 'https://github.com/search?q=' + domainName + "&type=commits";
     const shodanSearch = 'https://www.shodan.io/search?query=' + cleanedDomain;
+    const censysSearch = 'https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=' + cleanedDomain;
     const searchcodeSearch = 'https://searchcode.com/?q=' + domainName;
     const grepAppSearch = 'https://grep.app/search?q=' + domainName;
 
-    // TODO ajout d'une URL pour télécharger tous les commentaires détectés dans le code ( ce qui se trouve entre : /* et */, <!-- et -->, // et retour à la ligne au format CSV)
+    displayMatches('Dev Analysis :', [siteDork, stackoverflowDork, githubSearchCommits, shodanSearch, censysSearch, searchcodeSearch, grepAppSearch]);
 
-    displayMatches('Dev Analysis :', [siteDork, stackoverflowDork, githubSearchCommits, shodanSearch, searchcodeSearch, grepAppSearch ]);
 
+
+
+    //Test CSV
+    let comments = extractComments(htmlContent);
+    let commentsCSV = commentsToCSV(comments);
+    let CSVlink = commentsLink(commentsCSV, 'all-comments__' + domainName + tld.replace(/\./g,'_') + '.csv');
+    const popupContent = document.getElementById('recon-content');
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = "Page comments :";
+    popupContent.appendChild(titleElement);
+    const listElement = document.createElement('ul');
+    listElement.appendChild(CSVlink);
+    popupContent.appendChild(listElement);
 }
 
 function matchHTTPEndpoint(testString, pattern) {
@@ -402,13 +610,11 @@ function displayMatches(title, matches) {
             openallurls.addEventListener('click', () => {
                 const children = titleElement.querySelectorAll('*');
                 children.forEach(child => {
-                    console.log(child)
+                    // console.log(child)
                 if (child.tagName === 'A') {
                     const href = child.getAttribute('href');
                     if (href) {
-                        setTimeout(() => {
                             browser.tabs.create({url : href});
-                        }, 1000);
                     }
                 }
                 });
@@ -418,7 +624,7 @@ function displayMatches(title, matches) {
     }
 
     if (matches.size === 0) {
-        const noMatchesElement = document.createElement('p');
+        const noMatchesElement = document.createElement('ul');
         noMatchesElement.textContent = 'No matches found.';
         popupContent.appendChild(noMatchesElement);
     } else {
@@ -446,7 +652,18 @@ function displayMatches(title, matches) {
                 linkElement.href = 'https://search.dnslytics.com/search?d=domains&q=' + match;
                 linkElement.textContent = match;
                 listItem.appendChild(linkElement);
-            } else {
+            } else if (matchHTTPEndpoint(match, regexIP)) {
+                const linkElement = document.createElement('a');
+                linkElement.href = 'https://rapiddns.io/s/' + match +'#result';
+                linkElement.textContent = match;
+                listItem.appendChild(linkElement);
+            } else if (matchHTTPEndpoint(match, regexIP)) {
+                const linkElement = document.createElement('a');
+                linkElement.href = 'https://rapiddns.io/s/' + match +'#result';
+                linkElement.textContent = match;
+                listItem.appendChild(linkElement);
+            }
+            else {
                 listItem.textContent = match;
             }
             listElement.appendChild(listItem);
@@ -475,13 +692,11 @@ function displayMatchesWithFurtherInvestigation(title, matches, mode, subtext = 
             openallurls.addEventListener('click', () => {
                 const children = titleElement.querySelectorAll('*');
                 children.forEach(child => {
-                    console.log(child)
+                    // console.log(child)
                 if (child.tagName === 'A') {
                     const href = child.getAttribute('href');
                     if (href) {
-                        setTimeout(() => {
                             browser.tabs.create({url : href});
-                        }, 1000);
                     }
                 }
                 });
@@ -492,7 +707,7 @@ function displayMatchesWithFurtherInvestigation(title, matches, mode, subtext = 
 
 
     if (matches.size === 0) {
-        const noMatchesElement = document.createElement('p');
+        const noMatchesElement = document.createElement('li');
         noMatchesElement.textContent = 'No matches found.';
         popupContent.appendChild(noMatchesElement);
     } else {
@@ -540,13 +755,11 @@ function displayDork(match, title, mode){
             openallurls.addEventListener('click', () => {
                 const children = titleElement.querySelectorAll('*');
                 children.forEach(child => {
-                    console.log(child)
+                    // console.log(child)
                 if (child.tagName === 'A') {
                     const href = child.getAttribute('href');
                     if (href) {
-                        setTimeout(() => {
                             browser.tabs.create({url : href});
-                        }, 1000);
                     }
                 }
                 });
@@ -566,15 +779,15 @@ function displayDork(match, title, mode){
         const filetypeDorkDomain = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
         const dorkDomain = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22';
         const searchDomainWebsites = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
-        const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%22'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + '%40orange.fr%22';
+        const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%22'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + 'orange.fr%22';
         const scamMailDork = 'https://www.google.com/search?q=%22' + match + '%22%20%22Scam%22';
         const githubMail = 'https://github.com/search?q=' + match + '&type=commits';
 
-        displayMatches("Simple Mail", [simpleMail, searchMailWebsites,filetypeDorkMail,epieosMail,githubMail]);
-        displayMatches("Mail without domain", [noDomainMail]);
-        displayMatches("Domain only dorks", [dorkDomain, filetypeDorkDomain, searchDomainWebsites]);
-        displayMatches("Alternative domains", [altDomainMail]);
-        displayMatches("Scam", [scamMailDork]);
+        displayMatches("Simple Mail :", [simpleMail, searchMailWebsites,filetypeDorkMail,epieosMail,githubMail]);
+        displayMatches("Mail without domain :", [noDomainMail]);
+        displayMatches("Domain only dorks :", [dorkDomain, filetypeDorkDomain, searchDomainWebsites]);
+        displayMatches("Alternative domains :", [altDomainMail]);
+        displayMatches("Scam :", [scamMailDork]);
     }
     else if (mode == 2){
         const reverseDirectory = 'https://www.pagesjaunes.fr/annuaireinverse/recherche?quoiqui=' + encodeURIComponent(match) + '&univers=annuaireinverse';
@@ -587,16 +800,16 @@ function displayDork(match, title, mode){
             const epieos = 'https://epieos.com/?q=' + encodeURIComponent(match) + '&t=phone';
             
 
-            displayMatches("Reverse directory", [reverseDirectory]);
-            displayMatches("Phone informations", [phoneInformations, phoneDork, syncMe, epieos]);
+            displayMatches("Reverse directory :", [reverseDirectory]);
+            displayMatches("Phone informations :", [phoneInformations, phoneDork, syncMe, epieos]);
         }
         else {
-            displayMatches("Reverse directory", [reverseDirectory]);
-            displayMatches("Phone informations", [phoneInformations, phoneDork]);
+            displayMatches("Reverse directory :", [reverseDirectory]);
+            displayMatches("Phone informations :", [phoneInformations, phoneDork]);
         }
     }
     else if (mode == 3){
-        const regex = /(https\:\/\/[a-z,-]+\.facebook\.[a-z]+(\/(?!tr\?id=))|https\:\/\/[a-z,-]{0,}\.?youtube\.[a-z]+\/|https\:\/\/[a-z,-]{0,}\.?(instagram|pinterest|discord)\.[a-z]+\/|https\:\/\/github\.[a-z]+\/|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]+\/|https\:\/\/[a-z-]+\.linkedin\.[a-zA-Z0-9._-]+\/)/g;
+        const regex = /(https\:\/\/[a-z,-]+\.facebook\.[a-z]+(\/(?!tr\?id=))|https\:\/\/[a-z,-]{0,}\.?youtube\.[a-z]+\/|https\:\/\/[a-z,-]{0,}\.?(instagram|pinterest|discord)\.[a-z]+\/|https\:\/\/github\.[a-z]+\/|https\:\/\/([a-z,-]{0,}\.)*(twitter|x)\.[a-z]+\/|https\:\/\/[a-z-]+\.linkedin\.[a-zA-Z0-9._-]+(\/company|\/in|)\/)/g;
         const noUrlMatch = match.replace(regex, '');
         const socialBlade = 'https://socialblade.com/search/search?query=' + decodeURIComponent(noUrlMatch);
         const peekYou = 'https://www.peekyou.com/username=' + decodeURIComponent(noUrlMatch);
@@ -605,11 +818,11 @@ function displayDork(match, title, mode){
             let socialMediaMatches = findMatches(htmlContent, regexSocialMedia);
             const githubUrls = githubResultsOnly(socialMediaMatches);
 
-            displayMatches("Github links detected", (githubUrls));
-            displayMatches('Username search', [socialBlade, peekYou]);
+            displayMatches("Github links detected :", (githubUrls));
+            displayMatches("Username search :", [socialBlade, peekYou]);
         }
         else {
-            displayMatches('Username search', [socialBlade, peekYou]);
+            displayMatches("Username search :", [socialBlade, peekYou]);
         }
     }
 }
@@ -617,39 +830,84 @@ function displayDork(match, title, mode){
 function containsKeywords(text) {
 
     const keywords = [
-        "Social Media",
         "Social Medias",
-        "Google Id",
-        "Robots",
+        "IPs",
+        "Google Ids",
         "Sitemaps",
-        "Certificat",
-        "Whois",
-        "Archives",
-        "Scam",
-        "Dev Analysis"
+        "Scams",
+        "Dev Analysis",
+        "Simple Mail",
+        "Username search",
+        "Domain only dorks",
+        "Phone informations",
+        "Github links detected",
+        "Languages detected",
+        "Referencing",
+        "Most used words on the page",
+        "Suggested mirror websites",
+
     ];
 
-    const regex = new RegExp(keywords.join("|"), "i"); // "i" pour insensible à la casse
+    const regex = new RegExp(keywords.join("|"), "i"); 
 
     return regex.test(text);
 }
 
 
-// TODO Bouton pour screenshot de la page (capture png de la page) + enregistrement du code source de la page au format html (enregistrement différé, on fait pas de zip)
+/*PARTIE SUR LE CSV ICI*/
+/*Extraction des commentaires */
+function extractComments(htmlContent) {
+    // Remplacer les retours à la ligne par " <-' "
+    const modifiedContent = htmlContent.replace(/(\r\n|\r|\n)/g, " <-' ");
 
+    const matches = modifiedContent.match(commentPattern);
+    const comments = [];
+    if (matches) {
+        matches.forEach(match => {
+            const lineNumber = modifiedContent.substr(0, modifiedContent.indexOf(match)).split("<-'").length; // Compte les occurrences de "<-'" pour déterminer le numéro de ligne
+            comments.push([lineNumber, match]);
+        });
+    }
+    // console.log(comments);
+    return comments;
+}
 
+/*Création du CSV*/
+function commentsToCSV(comments) {
+    const csvRows = ["Line no.,Comment"];
+    comments.forEach(comment => {
+        csvRows.push(`${comment[0]},${comment[1].replace(/,/g, ' ')}`);
+    });
+    return csvRows.join("\n");
+}
 
-document.querySelector('#recon-button').addEventListener('click', () => {
-    chrome.tabs.executeScript({
-        code: 'document.documentElement.outerHTML'
-    }, (results) => {
-        document.getElementById('recon-content').innerHTML = '';
+/*Génération du lien*/
+function commentsLink(csvContent, fileName) {
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.textContent = "Download page comments in CSV";
+    return link;
+}
+/*FIN DE PARTIE SUR LE CSV*/
+
+document.getElementById('recon-checkbox').addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('seo-checkbox').checked = false;
         document.getElementById('seo-content').classList.add('hidden');
         document.getElementById('recon-content').classList.remove('hidden');
-        htmlContent = results[0];
-        analyzeHtml(htmlContent);
-    });
+        chrome.tabs.executeScript({ code: 'document.documentElement.outerHTML' }, (results) => {
+            const htmlContent = results[0];
+            analyzeHtml(htmlContent);
+        });
+    }
+    location.reload();
+    document.getElementById('recon-checkbox').checked = true;
 });
+
 
 chrome.tabs.executeScript({
     code: 'document.documentElement.outerHTML'
