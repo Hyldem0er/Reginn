@@ -1,3 +1,4 @@
+//detected language to country to TLD
 const languageCountryMap = [
     { code: 'en-US', language: 'English', country: 'United States', tld: '.us' },
     { code: 'en', language: 'English', country: 'United States', tld: '.us' },
@@ -229,7 +230,9 @@ const languageCountryMap = [
     { code: 'mfe', language: 'Mauritian Creole', country: 'Mauritius', tld: '.mu' }
 ];
 
+// Detect and display the language
 function languageDetection(htmlContent) {
+    // Regular expression to match language attributes in HTML content
     const regex = /lang="\w{1,3}(\-\w{1,3}|)"/g;
     const matches = [...htmlContent.matchAll(regex)];
     const uniqueLanguages = new Set();
@@ -239,6 +242,7 @@ function languageDetection(htmlContent) {
     const cleanedDomain = subDomain.length <= 1 ? domain : domain.replace(subDomain + '.', ''); // domain.com
     const tld = cleanedDomain.replace(domainName, ''); // .com
 
+    // Extract unique language codes from matches
     matches.forEach(match => {
         const langValue = match[0].split('=')[1].replace(/"/g, '');
         uniqueLanguages.add(langValue);
@@ -255,6 +259,7 @@ function languageDetection(htmlContent) {
     const titleElement = document.createElement('h2');
     popupContent.appendChild(titleElement);
 
+    // Display detected languages
     if (languageCountryArray.length > 0) {
         titleElement.textContent = "Languages detected :";
         const listElement = document.createElement('ul');
@@ -272,6 +277,7 @@ function languageDetection(htmlContent) {
 
     const tldSet = new Set();
 
+    // Display suggested mirror websites based on detected languages
     if (languageCountryArray.length >= 1 && languageCountryArray !== 'Unknown') {
         const tldTitleElement = document.createElement('h3');
         popupContent.appendChild(tldTitleElement);
@@ -296,6 +302,7 @@ function languageDetection(htmlContent) {
     
 }
 
+// Display the most used words on the page
 function displayResult(matches) {
     const popupContent = document.getElementById('seo-content');
     const titleElement = document.createElement('h2');
@@ -320,16 +327,7 @@ function displayResult(matches) {
     }
 }
 
-// function getDomain(url) {
-//     try {
-//         const urlObj = new URL(url);
-//         return urlObj.hostname;
-//     } catch (e) {
-//         console.error("Invalid URL:", e);
-//         return null;
-//     }
-// }
-
+// Analyze the domain for SEO referencing
 function analyseDomain(urlDomain){
     const popupContent = document.getElementById('seo-content');
     const titleElement = document.createElement('h2');
@@ -379,6 +377,7 @@ function analyseDomain(urlDomain){
 
 }
 
+// Display a link to find backlinks for the domain
 function backLinks(urlDomain){
     const popupContent = document.getElementById('seo-content');
     const titleElement = document.createElement('h2');
@@ -398,6 +397,7 @@ function backLinks(urlDomain){
     popupContent.appendChild(listElement);
 }
 
+// Display a link to find copies of the actual page
 function domainCopied(urlDomain){
     const popupContent = document.getElementById('seo-content');
     const titleElement = document.createElement('h2');
@@ -417,25 +417,40 @@ function domainCopied(urlDomain){
     popupContent.appendChild(listElement);
 }
 
+// Perform SEO analysis on the provided HTML content and URL
 function seo(htmlContent, urlDomain) {
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(htmlContent, 'text/html');
-    const text = htmlDoc.body.textContent;
-    const stopWords = [ 'the','and','a','of','in','to','is','on','for','with','as','yrhkldcu','zrhkldcv','fdnz','mmmm','by','at','or','if','be','are','but','from','that','which','who','whom','whose','this','these','those','there','where','when','how','why','all','any','each','few','more','most','several','some','such','no','nor','not','only','other','so','than','too','very','can','will','just','don',"don't",'should',"should've",'now','d','ll','m','re','ve','y','ain','aren',"aren't",'couldn',"couldn't",'didn',"didn't",'doesn',"doesn't",'hadn',"hadn't",'hasn',"hasn't",'haven',"haven't",'isn',"isn't",'ma','mightn',"mightn't",'mustn',"mustn't",'needn',"needn't",'shan',"shan't",'shouldn',"shouldn't",'wasn',"wasn't",'weren',"weren't",'wouldn',"wouldn't",'might','may','must','shall','should','will','would','的','是','了','和','在','到','是','上','为','与','作','于','以','为','着','或','如','可','就','会','就','现','不','从','那','哪','也','只','自','其','同','也','很','可','会','要','等','都','多','最','更','更多','一些','一样','没有','没','不是','只是','其他','所以','因为','所以','因此','而','太','再','の','が','は','を','に','と','で','が','の','を','に','と','で','が','は','が','は','を','に','と','で','か','より','も','また','し','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','der','die','das','und','in','zu','ist','auf','für','mit','als','von','an','oder','wenn','sein','sind','aber','von','dass','wer','welche','welcher','welches','wem','wessen','dieser','diese','dieses','das','da','wo','wann','wie','warum','alle','einige','mehr','am','meisten','ein','eine','einem','einer','eines','nicht','nur','eigene','andere','so','als','auch','sehr','kann','werden','gerade','tun','sollen','jetzt','el','la','los','las','y','en','a','para','con','como','por','de','en','o','si','es','son','pero','de','que','qué','quién','cuyo','este','estos','esta','estas','eso','aquí','no','desde','eso','qué','dónde','cuándo','cómo','por qué','todos','algunos','más','la','mayoría','un','una','unos','unas','no','sólo','propio','otro','así','que','también','muy','puede','será','justo','hacer','devrait','ahora','le','la','les','et','dans','à','est','sur','pour','avec','comme','par','de','en','ou','si','est','sont','mais','de','que','qui','dont','ce','ces','cet','cette','cela','ici','non','depuis','cela','où','quand','comment','pourquoi','tous','certains','plus','le','la','les','plusieurs','quelques','pas','seulement','propre','autre','ainsi','que','aussi','très','peut','sera','juste','faire','devrait','maintenant','twitter','facebook','instagram','linkedin','youtube','pinterest','snapchat','tiktok','reddit','tumblr','whatsapp','messenger','telegram','wechat','line','viber','skype','discord','微博','微信','qq','抖音','快手','百度贴吧','知乎','豆瓣','今日头条','小红书','陌陌','QQ空间','微博','微信','qq','抖音','快手','百度贴吧','知乎','豆瓣','今日头条','小红书','陌陌','QQ空间','ツイッター','フェイスブック','インスタグラム','リンクドイン','ユーチューブ','ピンタレスト','スナップチャット','ティックトック','レディット','タンブラー','ウェットアップ','メッセンジャー','テレグラム','ウェチャット','ライン','バイバー','スカイプ','ディスコード','left','right','wrapper','hover','body','bottom','media','screen','order','votre','heading','icon','vous','nous','notre','afin','ffffff','marque','produits','link','informations','return','product','autour','contre','link','button','span','return','product','personnes','function','type','autour','brand','tape','const','void','typeof','else','instanceof','veuillez','avez','links','cookies','peuvent','label','inherit','préférences','checkbox','string','données','textcontent','name','display','navigateur','généralement','permettent','services','publicité','datalayer','href','galement','width','checked','models','container','opacity','sticky','headline','transform','solid','kexftu','ljokvz','color','default','stripe','tfsi','mixte','inset','ensmodal','group','wltp','bank','site','pouvez','acceptez','after','center','your','nameinput','geneset','slider','open','submenu','pubmed','baseurl','your','password','account','user','icons','page','undefined','opens','after','faqpress','windowtwitter','windowinstagram','rsiw','tabw','thumbw','null','saisissez','ouvert','fermé','open','closed','config','starttime','endtime','abonne','avis','boutique','please','code','login','failed','status','contact','error','encountered','connecter','ajouter','while','error','trying','autres','identifiant','send','wordfence','var','liste','mon','des','compte','produit','total','mes','mes','eur','lin','usd','des','xcd','typetierce','aud','gbp','précédent','suivant','xaf','nzd','une','typepremière','ils','cookie','dkk','case','prix','new','reviews','inscrire','voir','tout','true','text','top','root','nos','slide','header','inject','vos','slideoverpanel','you','full','host','mobile','height','border','view','purposes','notice','preferences','xsmall','processing','toggle','title','url','buttons','box','near']
-    const words=text.toLowerCase().match(/(?<=[\s\n]|^)[a-z\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u00E0-\u00FF\u0100-\u017F]{3,}(?=\s|$)/g)||[];
-    const wordCounts={};
-    words.forEach(word=>{ if(!stopWords.includes(word)){ wordCounts[word]=(wordCounts[word]||0)+1;}});
-    const sortedWordCounts=Object.entries(wordCounts).sort((a,b)=>b[1]-a[1]);
-    const filteredWordCounts=sortedWordCounts.filter(([word, count]) => count > 4);
-    const uniqueMatches=filteredWordCounts.slice(0,10).map(([word, count])=>`${word} : ${count}`);
-    
+    // Extract content from (hopefully) SEO-relevant HTML tags
+    const interestingTags = /<(title|meta|h[1-6]|p|a|img|strong|em|b|i|article|section|header|footer|nav|aside|figure|figcaption|blockquote|ul|ol|li|span|div|time|address)[^>]*>(.*?)<\/\1>/gis;
+    const interestingContent = htmlContent.match(interestingTags)?.join(' ') || '';
+    // Remove remaining HTML tags
+    const cleanContent = interestingContent.replace(/<[^>]*>/g, ' ');
+    // List of stop words in multiple languages
+    const stopWords = ['we','the','and','a','of','in','to','is','on','it','for','with','as','yrhkldcu','zrhkldcv','fdnz','ease','mmmm','by','at','or','if','be','are','but','from','that','which','who','whom','whose','this','these','those','there','where','when','how','why','all','any','each','few','more','most','several','some','such','no','nor','not','only','other','so','than','too','very','can','will','just','don',"don't",'should',"should've",'now','d','ll','m','re','ve','y','ain','aren',"aren't",'couldn',"couldn't",'didn',"didn't",'doesn',"doesn't",'hadn',"hadn't",'hasn',"hasn't",'haven',"haven't",'isn',"isn't",'ma','mightn',"mightn't",'mustn',"mustn't",'needn',"needn't",'shan',"shan't",'shouldn',"shouldn't",'wasn',"wasn't",'weren',"weren't",'wouldn',"wouldn't",'might','may','must','shall','should','will','would','的','是','了','和','在','到','是','上','为','与','作','于','以','为','着','或','如','可','就','会','就','现','不','从','那','哪','也','只','自','其','同','也','很','可','会','要','等','都','多','最','更','更多','一些','一样','没有','没','不是','只是','其他','所以','因为','所以','因此','而','太','再','の','が','は','を','に','と','で','が','の','を','に','と','で','が','は','が','は','を','に','と','で','か','より','も','また','し','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','いる','する','ある','い','der','die','das','und','in','zu','ist','auf','für','mit','als','von','an','oder','wenn','sein','sind','aber','von','dass','wer','welche','welcher','welches','wem','wessen','dieser','diese','dieses','das','da','wo','wann','wie','warum','alle','einige','mehr','am','meisten','ein','eine','einem','einer','eines','nicht','nur','eigene','andere','so','als','auch','sehr','kann','werden','gerade','tun','sollen','jetzt','el','la','los','las','y','en','a','para','con','como','por','de','en','o','si','es','son','pero','que','qué','quién','cuyo','este','estos','esta','estas','eso','aquí','no','desde','eso','qué','dónde','cuándo','cómo','porqué','todos','algunos','más','la','mayoría','un','una','unos','unas','no','sólo','propio','otro','así','que','también','muy','puede','será','justo','hacer','devrait','ahora','le','la','les','et','dans','à','est','sur','pour','avec','comme','par','de','en','ou','si','est','sont','mais','de','que','qui','dont','ce','ces','cet','cette','cela','ici','non','depuis','cela','où','quand','comment','pourquoi','tous','certains','plus','le','la','les','plusieurs','quelques','pas','seulement','propre','autre','ainsi','que','aussi','très','peut','sera','juste','faire','devrait','maintenant','twitter','facebook','instagram','linkedin','youtube','pinterest','snapchat','tiktok','reddit','tumblr','whatsapp','messenger','telegram','wechat','line','viber','skype','discord','微博','微信','qq','抖音','快手','百度贴吧','知乎','豆瓣','今日头条','小红书','陌陌','QQ空间','微博','微信','qq','抖音','快手','百度贴吧','知乎','豆瓣','今日头条','小红书','陌陌','QQ空间','ツイッター','フェイスブック','インスタグラム','リンクドイン','ユーチューブ','ピンタレスト','スナップチャット','ティックトック','レディット','タンブラー','ウェットアップ','メッセンジャー','テレグラム','ウェチャット','ライン','バイバー','スカイプ','ディスコード','left','right','wrapper','hover','body','bottom','media','screen','order','votre','heading','icon','vous','nous','notre','afin','ffffff','marque','produits','link','informations','return','product','autour','contre','link','button','span','return','product','personnes','function','type','autour','brand','tape','const','void','typeof','else','instanceof','veuillez','avez','links','cookies','peuvent','label','inherit','préférences','checkbox','string','données','textcontent','name','display','navigateur','généralement','permettent','services','publicité','datalayer','href','galement','width','checked','models','container','opacity','sticky','headline','transform','solid','kexftu','ljokvz','color','default','stripe','tfsi','mixte','inset','ensmodal','group','wltp','bank','site','pouvez','acceptez','after','center','your','nameinput','geneset','slider','open','submenu','pubmed','baseurl','your','password','account','user','icons','page','undefined','opens','after','faqpress','windowtwitter','windowinstagram','rsiw','tabw','thumbw','null','saisissez','ouvert','fermé','open','closed','config','starttime','endtime','abonne','avis','boutique','please','code','login','failed','status','contact','error','encountered','connecter','ajouter','while','error','trying','autres','identifiant','send','wordfence','var','liste','mon','des','compte','produit','total','mes','mes','eur','lin','usd','des','xcd','typetierce','aud','gbp','précédent','suivant','xaf','nzd','une','typepremière','ils','cookie','dkk','case','prix','new','reviews','inscrire','voir','tout','true','text','top','root','nos','slide','header','inject','vos','slideoverpanel','you','full','host','mobile','height','border','view','purposes','notice','preferences','xsmall','processing','toggle','title','url','buttons','box','near','li','ul','tbody','fr','en','us','es','svg','our','have','has','nav','th','tr','div','hckvtotargetscroll','let','img','uet','le','de','un','à','être','et','en','avoir','que','pour','dans','ce','ces','il','qui','ne','pas','plus','faire','elle','on','avec','vous','comme','ils','je','ou','mais','se','ses','des','nous','y','du','au','aux','cette','par','une','lui','leur','là','si','mon','autre','sans','bien','aussi','très','même','tout','seulement','try','none','params','textarea','ontimeout','cookiebase','openerhost','callback','reporthabo','isreporting','и','в','не','на','я','что','с','это','как','по','но','он','она','они','мы','вы','так','все','да','или','к','от','для','то','такой','вот','чтобы','только','время','сейчас','может','всегда','никогда','где','когда','почему','как-то','вдруг','всё','другой','каждый','всё-таки','тоже','ли','если','даже','между','после','перед','сейчас','вдобавок','вместо','потому','также','вдоль','внутри','среди','пока','чтобы','вдруг','всегда','нужно','всё','всё-таки','вдобавок','вместе','всех','всему','всему','всех','всегда','из','за','об','его']
+    // Match words and characters in various languages, excluding single-letter words
+    const words = cleanContent.toLowerCase().match(/(?<=[\s\n]|^)([a-z\u00E0-\u00FC\u00C0-\u00DC\u00DF\u00E0-\u00FF\u0100-\u017F\u0400-\u04FF]{2,}|[\u4e00-\u9fa5\u3040-\u309F\u30A0-\u30FF]{1})(?=\s|$)/g) || [];
+    const wordCounts = {};
+    // Count occurrences of each word, excluding stop words
+    words.forEach(word => {
+        if (!stopWords.includes(word)) {
+            wordCounts[word] = (wordCounts[word] || 0) + 1;
+        }
+    });
+
+    // Sort and filter word counts
+    const sortedWordCounts = Object.entries(wordCounts).sort((a, b) => b[1] - a[1]);
+    const filteredWordCounts = sortedWordCounts.filter(([word, count]) => count > 2);
+    const uniqueMatches = filteredWordCounts.slice(0, 10).map(([word, count]) => `${word} : ${count}`);
+
+    // Display results and perform additional SEO analyses
     displayResult(uniqueMatches);
-    languageDetection(htmlContent);
-    analyseDomain(pageUrl);
-    backLinks(pageUrl);
-    domainCopied(pageUrl);
+    languageDetection(cleanContent);
+    analyseDomain(urlDomain);
+    backLinks(urlDomain);
+    domainCopied(urlDomain);
 }
 
+
+// Event listener for the SEO checkbox
 document.getElementById('seo-checkbox').addEventListener('change', function() {
     if (this.checked) {
         document.getElementById('recon-checkbox').checked = false;
