@@ -55,6 +55,10 @@ a:link {
     font-weight: normal;
 }
 
+a:visited {
+    color: #ffffff;
+}
+
 a:hover {
     background: #7c2929;
 }
@@ -390,6 +394,7 @@ h3, h3:hover {
     vertical-align: middle;
     background-color: #00000000;
     margin-left: 6px;
+    z-index: 1050;
 }
 
 /* Styling for custom checkboxes */
@@ -437,3 +442,40 @@ h3, h3:hover {
 #seo-checkbox-label {
     left: 88px;
 }
+
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 20px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+    z-index: 980;
+}
+
+.dropdown-section.active .dropdown-content {
+    max-height: 10000px;
+    transition: max-height 0.5s ease-in, padding 0.3s ease;
+}
+
+.dropdown-title {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 980;
+}
+
+.dropdown-title:hover {
+    background-color: #1f2129;
+}
+
+.dropdown-title::after {
+    content: '+';
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-section.active .dropdown-title::after {
+    content: '-';
+}
+
+
+

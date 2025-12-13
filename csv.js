@@ -5,18 +5,63 @@ function cleanData(data) {
     return data.replace(/[\r\n]+|YandexID:/g, '').trim();
 }
 
+// Mapping des catégories vers typesTargeted pour OSINTRACKER
+function getTypesTargeted(category) {
+    const mapping = {
+        'Phone': 'generic-phone number',
+        'Social Media': 'generic-alias / screen name',
+        'Google ID': 'generic-id',
+        'Yandex ID': 'generic-id',
+        'Top Mail ID': 'generic-id',
+        'Email': 'generic-email address',
+        'CDN': 'generic-domain',
+        'API': 'generic-api',
+        'IP': 'generic-ip address'
+    };
+    return mapping[category] || '';
+}
 
-//Add the extracted data to the CSV file
+// Génère une ligne CSV pour OSINTRACKER
+function mapToOSINTrackerFormat(row) {
+    const name = `${row.website} (${row.category})`;
+    const type = 'website';
+    const description = `Extracted ${row.category} from ${row.website}`;
+    const url = row.website.startsWith('http') ? row.website : `https://${row.website}`;
+    const queryUrl = '';
+    const generic = 'yes';
+    const typesTargeted = getTypesTargeted(row.category);
+    return {
+        name,
+        type,
+        description,
+        url,
+        queryUrl,
+        generic,
+        typesTargeted
+    };
+}
+
+// Génère le contenu CSV pour OSINTRACKER
+function generateOSINTrackerCSV(data) {
+    const header = 'name,type,description,url,queryUrl,generic,typesTargeted';
+    const rows = data.map(row => {
+        const mapped = mapToOSINTrackerFormat(row);
+        return `"${cleanData(mapped.name)}","${mapped.type}","${cleanData(mapped.description)}","${mapped.url}","${mapped.queryUrl}",${mapped.generic},"${mapped.typesTargeted}"`;
+    });
+    return [header, ...rows].join('\n');
+}
+
 function addToCsvData() {
     const reconContent = document.getElementById('recon-content').innerText;
-    const regexYandexIdsInRecon = /Yandex ID :\n(\d{8})/g;
+    const regexYandexIdsInRecon = /Yandex IDs? :\n(\d{8})/g;
+    const regexTopMailIdsInRecon = /Top Mail IDs? :\n(\d{7})/g;
     const website = getDomain(pageUrl);
     const cleanedContent = reconContent.replace(/UA-(\d| |\(|\)|-){6,24}/g, '');
     let regexPhoneSimplified = /(\d| |\(|\)|-){6,24}(?![a-z._])(?<![a-z._])/g;
-
     let socialMediaMatches = findMatches(reconContent, regexSocialMedia) || [];
     let googleIdsMatches = findMatches(reconContent, regexGoogleIds) || [];
     let yandexIdsMatches = findMatches(reconContent, regexYandexIdsInRecon) || [];
+    let topMailIdsMatches = findMatches(reconContent, regexTopMailIdsInRecon) || [];
     let emailMatches = findMatches(reconContent, regexEmail) || [];
     let cdnMatches = findMatches(reconContent, regexCDN) || [];
     let apiMatches = findMatches(reconContent, regexAPI) || [];
@@ -30,23 +75,27 @@ function addToCsvData() {
         return match ? match[0] : null;
     }).filter(Boolean);
 
+    // Extract Top Mail ID numbers
+    let topMailIdNumbers = Array.from(topMailIdsMatches).map(id => {
+        const match = id.match(/\d+/);
+        return match ? match[0] : null;
+    }).filter(Boolean);
+
     // Filter phoneMatches to exclude those that are in googleIdsMatches or yandexIdNumbers
     filteredPhoneMatches = phoneMatches.filter(phoneMatch => {
         const cleanedPhoneMatch = phoneMatch.replace(/\D/g, '');
-
         const isInGoogleIds = Array.from(googleIdsMatches).some(googleIdMatch =>
             googleIdMatch.includes(cleanedPhoneMatch)
         );
-
         const isInYandexIds = yandexIdNumbers.includes(cleanedPhoneMatch);
-
+        const isInTopMailIds = topMailIdNumbers.includes(cleanedPhoneMatch);
+        console.log(topMailIdNumbers);
+        console.log(cleanedPhoneMatch);
         const isInSocialMedia = Array.from(socialMediaMatches).some(socialMediaMatch =>
             socialMediaMatch.includes(phoneMatch)
         );
-
         const isInFullUrl = fullUrl.includes(phoneMatch);
-
-        return !(isInGoogleIds || isInSocialMedia || isInYandexIds || isInFullUrl);
+        return !(isInGoogleIds || isInSocialMedia || isInYandexIds || isInTopMailIds || isInFullUrl);
     });
 
     // Add matches to extractedData with their respective categories
@@ -54,6 +103,7 @@ function addToCsvData() {
     socialMediaMatches.forEach(match => extractedData.push({ website, category: 'Social Media', match: cleanData(match) }));
     googleIdsMatches.forEach(match => extractedData.push({ website, category: 'Google ID', match: cleanData(match) }));
     yandexIdsMatches.forEach(match => extractedData.push({ website, category: 'Yandex ID', match: cleanData(match) }));
+    topMailIdsMatches.forEach(match => extractedData.push({ website, category: 'Top Mail ID', match: cleanData(match) }));
     emailMatches.forEach(match => extractedData.push({ website, category: 'Email', match: cleanData(match) }));
     cdnMatches.forEach(match => extractedData.push({ website, category: 'CDN', match: cleanData(match) }));
     apiMatches.forEach(match => extractedData.push({ website, category: 'API', match: cleanData(match) }));
@@ -61,37 +111,9 @@ function addToCsvData() {
 
     // Save the extracted data to local storage
     localStorage.setItem('extractedData', JSON.stringify(extractedData));
-
     alert('Data added to CSV');
 }
 
-// Download the extracted data as a CSV file
-function downloadCSV() {
-    if (extractedData.length === 0) {
-        alert('No data to download');
-        return;
-    }
-
-    const csvContent = [
-        'Website,Category,Match',
-        ...extractedData.map(row => `${row.website},${row.category},${row.match}`)
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('href', url);
-    a.setAttribute('download', 'Reginn_extract.csv');
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    // Clear the extracted data from local storage
-    localStorage.removeItem('extractedData');
-    extractedData = [];
-}
 
 /*--------------------*/
 /* GRAPHML GENERATION */
@@ -265,30 +287,21 @@ function downloadCSV(fromGraphML = false) {
         alert('No data to download');
         return;
     }
-
-    const csvContent = [
-        'Website,Category,Match',
-        ...extractedData.map(row => `${row.website},${row.category},${row.match}`)
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const csvContent = generateOSINTrackerCSV(extractedData);
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.setAttribute('href', url);
-    a.setAttribute('download', 'Reginn_extract.csv');
+    a.setAttribute('download', 'osintracker_import.csv');
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-
-    // Clear the extracted data from local storage only if not called from downloadGraphML
-    if (!fromGraphML) {
-        localStorage.removeItem('extractedData');
-        extractedData = [];
-    }
+    // Clear the extracted data from local storage
+    localStorage.removeItem('extractedData');
+    extractedData = [];
 }
-
 
 // Event listeners for adding data to CSV and downloading CSV/GraphML files
 document.getElementById('add').addEventListener('click', addToCsvData);

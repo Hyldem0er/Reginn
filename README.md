@@ -1,11 +1,6 @@
-<h1 align="center" >REGINN</h1>
+# Reginn is now an [extension on firefox](https://addons.mozilla.org/fr/firefox/addon/hyldem0er_reginn/) !
 
-<p align="center">
-  <img src="https://github.com/Hyldem0er/Reginn/blob/main/icons/Reginn.png" alt="Profile Icon" width="300px">
-</p>
-
-# Reginn is now an [extension on firefox 🦊](https://addons.mozilla.org/fr/firefox/addon/hyldem0er_reginn/) !
-
+# Reginn
 - Create a bookmark called "Reginn" (or whatever you want but it'd be nice) in your browser.
 - Copy this code in the URL field :
 ```javascript=
@@ -15,6 +10,6 @@ javascript:(function(){var regex=/%28%3F%21%28https%5C%3A%5C%2F%5C%2F%28%28conne
 - click on the bookmark when you are on your beloved website
 
 *It is recommended to try it in the source code too (CTRL+U).*
-*If you're interested in the regexes used in this code, you'll find the details in the [regex.md](https://github.com/Hyldem0er/Reginn/blob/main/regex.md) file.*
+*If you're interested in the regexes used in this code, you'll find the details in the [regex.md](https://github.com/Hyldem0er/Reginn/blob/main/Regex.md) file.*
 
 Thanks to [OSINT Newsletter](https://github.com/The-OSINT-Newsletter) and its "bouncer" tool for the bookmark idea.

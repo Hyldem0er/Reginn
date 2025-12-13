@@ -1,21 +1,24 @@
-let regexPhone = /(?<!viewbox=|viewBox=|values=|\d:"|\d\d:"|\d\d\d:"|\d\d\d\d:"|\d|index:|value"|<polygon points=|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:|background\:new|background="new|SIRET\s\:)(?!(?:(\s)(?:(?:[0-9](\s|%20|\-)){3,})(\s|%20|)))(?:(?:(?:\'|\"|\(|\>|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?<!viewbox=|viewBox=|values=|\d:"|index:|value"|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:)(?:(?:(?:(?:0|\+)(?:\d{0,3}|)(?: |)(?:\[|\()\d{1,3}(?:\]|\)))|0|(?:\+\s?\d{1,4}))(?:\s|-|\()?)(?:\d(?:\s|-|%20|\))?){8,10}(?:\'|\"|\)|\<|\s|%20){1})|(?:(?!((.)(?:(?:\d(?:\s|\-|%20)){3,})(?:\s|%20|)))(?:(?:\'|\"|\(|\>|\s|%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?:(?:(?:(?:(?:(?:\+)(?:\[|\(|)1(?:\]|\)|))|(?:\(?:|\[|)1(?:\)|\]|)|\+)(?:\s|-)?)(?:\d(?:\s|-)?){10})|(?:\[|\(|)\d{3}(?:\]|\)|)(?:-|\s|\%20)\d{3}(?:-|\s)\d{3,4})(?:\'|\"|\)|\<|\s){1}))|(?:(?:tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON:|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":")(?:\d(?:-|\s|%20|)){6,12}(?:\'|\"|\)|\<|\s|\%20)))(?! property="fb:pages")/g;
-let regexSocialMedia = /(?!(?:(?:https?)\:\/\/(?:(?:connect|support|developers|about|www\.(?:facebook|youtube)\.com\/(help|sharer|photo|recover|login|legal|hashtag|embed|settings))|(?:(?:gits.|)(?:github.com|pinterest.com|twitter.com)\/(?:features|share|pin|enterprise|team|search|solutions|customer-stories|readme|topics|trending|collections|pricing|notifications|security|fluidicon))|(?:www\.instagram\.com\/p)|ct\.pinterest.com)))(?:https?\:\/\/(?:[a-z,-]+\.)?facebook\.[a-z]+(?:\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?\/@&=-]+)+|https?\:\/\/(?:[a-z,-]+\.)?youtube\.[a-z]+(?:\/[a-zA-Z0-9:%_+.,#?!@&=-]+)+|https?\:\/\/(?:[a-z,-]+\.)?(?:instagram|pinterest|discord|twitch|patreon|vk|ok|weibo|douyin|xiaohongshu|bilibili|medium)\.[a-z]+(?:\/[a-zA-Z0-9_.@-]+)+|https\:\/\/github\.[a-z]+(?:\/[a-zA-Z0-9_.-]+)+|https?\:\/\/(?:[a-z,-]+\.)?(?:twitter|x)\.[a-z]+\/[a-zA-Z0-9:%_+.,#?!@&=-]+|https?\:\/\/(?:[a-z-]+\.)?linkedin\.[a-zA-Z0-9._-]+(?:\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+|https?:\/\/(?:mp\.weixin\.qq\.com\/s|user\.qzone\.qq\.com|wa\.me|t\.me|(?:(?:[a-zA-Z0-9-_%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+\.)*bsky\.social(?:\/about\/blog)?)|(?:bsky\.app\/profile))(?:\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+|https?:\/\/(?:[a-zA-Z0-9%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+\.[a-zA-Z0-9%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+|(www\.)?(?:threads|tiktok)\.[a-z]+)\/@[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)/g;
-let regexMastodon = /https?:\/\/(?:[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+\.[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+|tiktok\.[a-z]+)\/@[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+/g;
-let regexGoogleIds = /G\-[A-Z0-9]{10}|pub\-[0-9]{16}|UA\-[0-9-]{10,12}|GTM\-[0-9A-Z]{7}|AW\-[0-9A-Z]{16}/g;
+let regexPhone = /(?<!viewbox=|viewBox=|values=|\d:"|\d\d:"|\d\d\d:"|\d\d\d\d:"|\d|index:|value"|<polygon points=|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:|background\:new|background="new|SIRET :|SIRET:|SIRET |Steuernummer \:|Steuernummer \:|Steuernummer\:|Steuernummer |NIF \:|NIF:|NIF |IVA \:|IVA:|IVA |Codice Fiscale \:|Codice Fiscale:|Codice Fiscale |VAT\:|VAT :|VAT |TVA \:|TVA:|TVA |ИНН \:|ИНН:|ИНН |统一社会信用代码 \:|统一社会信用代码:|统一社会信用代码 |เลขประจำตัวผู้เสียภาษี \:|เลขประจำตัวผู้เสียภาษี:|เลขประจำตัวผู้เสียภาษี |法人番号 \:|法人番号:|法人番号 )(?!(?:(\s)(?:(?:[0-9](\s|%20|\-)){3,})(\s|%20|)))(?:(?:(?:\'|\"|\(|\>|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone":"|telefon":"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?<!viewbox=|viewBox=|values=|\d:"|\d\d:"|\d\d\d:"|\d\d\d\d:"|\d|index:|value"|<polygon points=|SIREN|SIREN:|SIREN :|SIREN |rgb|bid=|background\:|background\:new|background="new|SIRET\s\:|SIRET\s:|SIRET:|SIRET |Steuernummer\s\:|Steuernummer\s:|Steuernummer:|Steuernummer |NIF\s\:|NIF\s:|NIF:|NIF |Codice Fiscale\s\:|Codice Fiscale\s:|Codice Fiscale:|Codice Fiscale |VAT\s\:|VAT\s:|VAT:|VAT |TVA\s\:|TVA\s:|TVA:|TVA |ИНН\s\:|ИНН\s:|ИНН:|ИНН |统一社会信用代码\s\:|统一社会信用代码\s:|统一社会信用代码:|统一社会信用代码 |เลขประจำตัวผู้เสียภาษี\s\:|เลขประจำตัวผู้เสียภาษี\s:|เลขประจำตัวผู้เสียภาษี:|เลขประจำตัวผู้เสียภาษี |法人番号\s\:|法人番号\s:|法人番号:|法人番号 )(?:(?:(?:(?:0|\+)(?:\d{0,3}|)(?: |)(?:\[|\()\d{1,3}(?:\]|\)))|0|(?:\+\s?\d{1,4}))(?:\s|-|\()?)(?:\d(?:\s|-|%20|\))?){8,10}(?:\'|\"|\)|\<|\s|%20){1})|(?:(?!((.)(?:(?:\d(?:\s|\-|%20)){3,})(?:\s|%20|)))(?:(?:\'|\"|\(|\>|\s|%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"| ){1}(?:(?:(?:(?:(?:(?:\+)(?:\[|\(|)1(?:\]|\)|))|(?:\(?:|\[|)1(?:\)|\]|)|\+)(?:\s|-)?)(?:\d(?:\s|-)?){10})|(?:\[|\(|)\d{3}(?:\]|\)|)(?:-|\s|\%20)\d{3}(?:-|\s)\d{3,4})(?:\'|\"|\)|\<|\s){1}))|(?:(?:tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon": "|tel":"|tell":"|phone":"|telephone": "|telefon": "|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON:|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":")(?:\d(?:-|\s|%20|)){6,12}(?:\'|\"|\)|\<|\s|\%20)))(?! property="fb:pages")/g;
+let regexSocialMedia = /(?!(?:(?:https?)\:\/\/(?:(?:connect|support|developers|about|www\.(?:facebook|youtube)\.com\/(help|sharer|photo|recover|login|legal|hashtag|embed|settings))|(?:(?:gits.|)(?:github.com|pinterest.com|twitter.com)\/(?:features|share|pin|enterprise|team|search|solutions|customer-stories|readme|topics|trending|collections|pricing|notifications|security|fluidicon))|(?:www\.instagram\.com\/p)|ct\.pinterest.com)))(?:https?\:\/\/(?:[a-z,-]+\.)?facebook\.[a-z]+(?:\/(?!tr\?id=)[a-zA-Z0-9:%_+.,#!?\/@&=-]+)+|https?\:\/\/(?:[a-z,-]+\.)?youtube\.[a-z]+(?:\/[a-zA-Z0-9:%_+.,#?!@&=-]+)+|https?\:\/\/(?:[a-z,-]+\.)?(?:instagram|pinterest|discord|twitch|patreon|vk|ok|weibo|douyin|xiaohongshu|bilibili|medium)\.[a-z]+(?:\/[a-zA-Z0-9_.@-]+)+|https\:\/\/github\.[a-z]+(?:\/[a-zA-Z0-9_.-]+)+|https?\:\/\/(?:[a-z,-]+\.)?(?:twitter|x)\.[a-z]+\/[a-zA-Z0-9:%_+.,#?!@&=-]+|https?\:\/\/(?:[a-z-]+\.)?linkedin\.[a-zA-Z0-9._-]+(?:\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+|https?:\/\/(?:mp\.weixin\.qq\.com\/s|user\.qzone\.qq\.com|wa\.me|t\.me|(?:(?:[a-zA-Z0-9-_%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+\.)*bsky\.social(?:\/about\/blog)?)|(?:bsky\.app\/profile))(?:\/[a-zA-Z0-9-+_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+|https?:\/\/(?:[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+\.[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+|tiktok\.[a-z]+)\/@[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)/g;
+let regexGoogleIds = /G\-[A-Z0-9]{10}|pub\-[0-9]{16}|UA\-[0-9-]{1,12}|GTM\-[0-9A-Z]{7}|AW\-[0-9A-Z]{16}/g;
 let regexYandexIds = /(?:\/\/mc\.yandex\.ru\/(?:watch|metrika\.js)\/)\d{8}/g;
-let regexEmail = /(?![a-zA-Z0-9._-]+\@(?:sentry\.[a-z]+|(?:[a-zA-Z0-9_-]{0,})(?:\.(?:png|jpg|jpeg|pdf|ingest|\w+\.png|\w+\.jpg|\w+\.jpeg|\w+\.pdf|\w+\.ingest\.[a-z]{1,3}\.sentry\.io|newrelic\.com|datadoghq\.com|loggly\.com|wixpress\.com|googleapis\.com))+|2x\.webp))[\w.-]+(?:@|\[at\]|\(at\)| at |\[TheSymbolWithaA\]|\(TheSymbolWithaA\))[\w-]+(?:(?:\.|\(dot\)|\[dot\]| dot )[a-z]{2,})+/g;
+let regexTopMailIds = /(?:(?:\/\/top\.mail\.ru\/jump\?from=)|(?:tmr\.push\(\{id\: "))\d{7}/g;
+let regexEmail = /(?![a-zA-Z0-9._-]+\@(?:sentry\.[a-z]+|(?:[a-zA-Z0-9_-]{0,})(?:\.(?:png|jpg|jpeg|pdf|ingest|\w+\.png|\w+\.jpg|\w+\.jpeg|\w+\.pdf|\w+\.ingest\.[a-z]{1,3}\.sentry\.io|newrelic\.com|datadoghq\.com|loggly\.com|wixpress\.com|googleapis\.com|sentry\-ingest(\.[a-z]+)+))+|[1-2]x\.(?:webp|avif)))[\w.-]+(?:@|\[at\]|\(at\)| at | \[at\] | \(at\) |\[TheSymbolWithaA\]|\(TheSymbolWithaA\))[\w-]+(?:(?:\.|\(dot\)|\[dot\]| dot | \(dot\) | \[dot\] )[a-z]{2,})+/gi;
 let regexCDN = /(?:[a-z\-]+\.){0,}[a-z_-]{0,}cdn\.[a-z\-]+(\.[a-z\-]+){0,}/g;
 let regexAPI = /(?![a-z]+\.png)(?:(?:api(?:s?))\.[a-z]+\.[a-z]+|(?:[a-z]+\.){0,}[a-z]+apis?\.[a-z]+|https:\/\/(?:[a-z]+\.)+[a-z]+(?:\/[a-z]+)+\/api\/)/g;
 let regexWayback = /https:\/\/web\.archive\.org\/web\/\d{14}\//g;
 let regexLocalhost = /https?:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d{1,4})?\//g;
+let regexLocalfile = /https?:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d{1,4})?\//g;;
 let commentPattern = /(?<!https:|http:|src="|lazyload="|ref="|mp4="|reference="|webpack:|before{ )(?:\/\*{1,2}[\s\S]*?\*\/|\/{2}[\s\S][^\/]*?(?:\r\n|\r|\n|$)|<!--[\s\S]*?-->)/g;
-let linkPattern = /https?:\/\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+(?:\.[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+(?:\/[a-zA-Z0-9-_.%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)*/g;
-let regexIP = /(?<![\d-])(?<![a-zA-Z. ,]|version=")(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?!\d)(?![a-zA-Z])/gm;
+let linkPattern = /(?<!<|[0-9]|\])(?:[a-zA-Z]+:?)?(?:\/\/\/|\\\/\\\/|\/\/|\/)[a-zA-Z0-9-_,+.?=;#:@!\\%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+(?:[a-zA-Z0-9-_.?=;:#@!,+\\%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)+(?:\/{1,2}[a-zA-Z0-9-_.?=;:#@!,+\\%áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+)*/g;
+let regexIP = /(?<![\d])(?<![a-zA-Z. ,]|version="|"version":")(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?!\d)(?![a-zA-Z])/gm;
 let pageUrl = '';
 let fullUrl = '';
 
-const httppattern = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]{1,256}\.[a-zA-Z0-9()\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]+\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]*)/;
+const httppattern = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%.,_\+~#=\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]{1,256}\.[a-zA-Z0-9()\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]+\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=\u0000-\u007F\u4E00-\u9FA5\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u00E0-\u00FC\u00C0-\u00DC\u00DF\u0100-\u017F\u0370-\u03FF\u0600-\u06FF\u0590-\u05FF\u0E00-\u0E7F\uAC00-\uD7AF\u0900-\u097F\u0980-\u09FF\u0B80-\u0BFF\u0102-\u0103\u1EA0-\u1EFF]*)/;
 const googlePattern = /https:\/\/www\.google\.com\/search\?q=(?:[^&]+)/;
+const yandexPattern = /https:\/\/yandex\.com\/search\?text=(?:[^&]+)/;
+const topMailPattern = /\b\d{7}\b/g;
 
 // Query the active tab to get its URL
 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
@@ -65,17 +68,26 @@ function findMatches(content, regex) {
         return new Set();
     }
 
-    // Clean phone numbers before setting to avoid duplicates like tel:123456789, 123456789, with and without spaces, etc.
-    const cleanRegex = /[<>"'\r\n]|\/\/mc\.yandex\.ru\/(?:watch|metrika\.js)\/| |%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon:|tel":"|tell":"|phone":"|telephone":"|telefon":s"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g;
+    const atRegex = /\[at\]|\(at\)| at |\[ at \]|\[TheSymbolWithaA\]|\(TheSymbolWithaA\)/g;
+    const dotRegex = /(?:\.|\(dot\)|\[dot\]| dot |\[ dot \])/g;
+    const cleanRegex = /[<>"'\r\n]|\/\/mc\.yandex\.ru\/(?:watch|metrika\.js)\/|(?:(?:\/\/top\.mail\.ru\/jump\?from=)|(?:tmr\.push\(\{id\: "))| |%20|tel:|tell:|phone:|telephone:|telefon:|tel": "|tell": "|phone": "|telephone": "|telefon:|tel":"|tell":"|phone":"|telephone":"|telefon":s"|Tel:|Tell:|Phone:|Telephone:|Telefon:|Tel": "|Tell": "|Phone": "|Telephone": "|Telefon:|Tel":"|Tell":"|Phone":"|Telephone":"|Telefon":"| TEL:|TELL:|PHONE:|TELEPHONE:|TELEFON:|TEL": "|TELL": "|PHONE": "|TELEPHONE": "|TELEFON": "|TEL":"|TELL":"|PHONE":"|TELEPHONE":"|TELEFON":"/g;
     const matches = new Set();
 
     // Divide htmlContent into smaller parts for processing
     const partSize = 10000;
     for (let i = 0; i < content.length; i += partSize) {
         const chunk = content.slice(i, i + partSize);
-        const chunkMatches = Array.from(chunk.matchAll(regex)).map(match => match[0].replace(cleanRegex, ''));
-        const filteredChunkMatches = chunkMatches.filter(match => !/^[01]+$/.test(match));
-        filteredChunkMatches.forEach(match => matches.add(match));
+        const chunkMatches = Array.from(chunk.matchAll(regex)).map(match => match[0]);
+
+        // Replace variations of "at" with "@" in each match before cleaning
+        chunkMatches.forEach(match => {
+            const atReplacedMatch = match.replace(atRegex, '@');
+            const dotReplacedMatch = atReplacedMatch.replace(dotRegex, '.')
+            const cleanedMatch = dotReplacedMatch.replace(cleanRegex, '');
+            if (!/^[01]+$/.test(cleanedMatch)) {
+                matches.add(cleanedMatch);
+            }
+        });
     }
     return matches;
 }
@@ -3868,11 +3880,12 @@ function parseDomain(cleanURL) {
 
 // Analyze HTML content to find various matches
 function analyzeHtml(htmlContent) {
-    
+
     let phoneMatches = findMatches(htmlContent, regexPhone);
     let socialMediaMatches = findMatches(htmlContent, regexSocialMedia);
     let googleIdsMatches = findMatches(htmlContent, regexGoogleIds);
     let yandexIdsMatches = findMatches(htmlContent, regexYandexIds);
+    let topMailIdsMatches = findMatches(htmlContent, regexTopMailIds);
     let emailMatches = findMatches(htmlContent, regexEmail);
     let cdnMatches = findMatches(htmlContent, regexCDN);
     let apiMatches = findMatches(htmlContent, regexAPI);
@@ -3880,8 +3893,10 @@ function analyzeHtml(htmlContent) {
     const domain = getDomain(pageUrl); // www.domain.com
     const domainName = parseDomain(domain) // domain    
     const subDomain = (domain.replace(domainName, '').slice(0,(domain.replace(domainName, '')).indexOf('.'))); // www.
-    const cleanedDomain = subDomain.length <= 1 ? domain : domain.replace(subDomain + '.', ''); // domain.com
-    const tld = cleanedDomain.replace(domainName, ''); // .com
+    const cleanedDomain = subDomain.length < 1 ? domain : domain.replace(subDomain + '.', ''); // domain.com
+    const tld = cleanedDomain.replace(domainName, ''); // .
+    const wwwDomain = subDomain.length > 1 ? domain : domain.replace(domain, 'www.' + domain); 
+    console.log(wwwDomain);
 
     // Check for localhost in the HTML content
     if (regexLocalhost.test(htmlContent)) {
@@ -3902,142 +3917,211 @@ function analyzeHtml(htmlContent) {
         if (match.includes('+')) {
             return false;
         }
-        const indicatif = tldToCountry.find(item => item.tld === tld);
-        if (!indicatif) {
+        const areaCode = tldToCountry.find(item => item.tld === tld);
+        if (!areaCode) {
             return false;
         }
         return true;
     })
     .map(match => {
 
-        const indicatif = tldToCountry.find(item => item.tld === tld);
-        if (indicatif) {
-            return indicatif.code + match.slice(1);
+        const areaCode = tldToCountry.find(item => item.tld === tld);
+        if (areaCode) {
+            return areaCode.code + match.slice(1);
         }
         return match;
     });
 
-    // Display phone matches
-    if (phoneMatches.size > 1){
-        displayMatchesWithFurtherInvestigation('Phones (' + phoneMatches.size + ' matches) :'  , phoneMatches, 2);
-    }
-    else if (phoneMatches.size === 1){
-        displayMatchesWithFurtherInvestigation('Phone :', phoneMatches, 2);
-    }
+    // Combine phone matches and deduced phone matches
+    let combinedPhoneMatches = Array.from(phoneMatches);
+    let combinedDeducedPhoneMatches = deducedPhoneMatches.map(match => "Area code deduced from TLD : " + match);
+    let allPhoneMatches = combinedPhoneMatches.concat(combinedDeducedPhoneMatches);    
 
-    // Display deduced phone matches
-    if (deducedPhoneMatches.length > 1){
-        displayMatchesWithFurtherInvestigation('    Area code deduced from TLD (' + deducedPhoneMatches.length + ' matches) :'  , deducedPhoneMatches, 2, true);
+    // Display combined phone matches
+    if (allPhoneMatches.length > 1) {
+        displayMatchesWithFurtherInvestigation('Phones (' + allPhoneMatches.length + ' matches)', new Set(allPhoneMatches), 2);
+    } else if (allPhoneMatches.length === 1) {
+        displayMatchesWithFurtherInvestigation('Phone (1 match)', new Set(allPhoneMatches), 2);
     }
-    else if (deducedPhoneMatches.length === 1){
-        displayMatchesWithFurtherInvestigation('    Area code deduced from TLD :', deducedPhoneMatches, 2, true);
-    }
-
 
     // Display social media matches
     if (githubUserFilter(socialMediaMatches).size > 1){
         displayMatchesWithFurtherInvestigation('Social Medias (' + githubUserFilter(socialMediaMatches).size + ' matches) :', githubUserFilter(socialMediaMatches), 3);
     }
     else if (githubUserFilter(socialMediaMatches).size === 1){
-        displayMatchesWithFurtherInvestigation('Social Media :', githubUserFilter(socialMediaMatches), 3);
+        displayMatchesWithFurtherInvestigation('Social Media (1 match)', githubUserFilter(socialMediaMatches), 3);
     }
 
     // Display email matches
     if (emailMatches.size > 1){
-        displayMatchesWithFurtherInvestigation('Emails (' + emailMatches.size + ' matches) :', emailMatches, 1);
+        displayMatchesWithFurtherInvestigation('Emails (' + emailMatches.size + ' matches)', emailMatches, 1);
     }
     else if (emailMatches.size === 1){
-        displayMatchesWithFurtherInvestigation('Email :', emailMatches, 1);
+        displayMatchesWithFurtherInvestigation('Email (1 match)', emailMatches, 1);
     }
 
     // Display Google ID matches
     if (googleIdsMatches.size > 1){
-        displayMatches('Google IDs :', googleIdsMatches);
+        displayMatches('Google IDs (' + googleIdsMatches.size + ' matches)', googleIdsMatches);
     }
     else if (googleIdsMatches.size === 1){
-        displayMatches('Google ID :', googleIdsMatches);
+        displayMatches('Google ID (1 match)', googleIdsMatches);
     }
 
-    // Display Google ID matches
+    // Display Yandex ID matches
     if (yandexIdsMatches.size > 1){
-        displayMatches('Yandex IDs :', yandexIdsMatches);
+        displayMatches('Yandex IDs (' + yandexIdsMatches.size + ' matches)', yandexIdsMatches);
     }
     else if (yandexIdsMatches.size === 1){
-        displayMatches('Yandex ID :', yandexIdsMatches);
+        displayMatches('Yandex ID (1 match)', yandexIdsMatches);
+    }
+
+    // Display TopMail ID matches
+    if (topMailIdsMatches.size > 1){
+        displayMatches('Top Mail IDs (' + topMailIdsMatches.size + ' matches)', topMailIdsMatches);
+    }
+    else if (topMailIdsMatches.size === 1){
+        displayMatches('Top Mail ID (1 match)', topMailIdsMatches);
     }
 
     // Display CDN matches
     if (cdnMatches.size > 1){
-        displayMatches('CDNs :', cdnMatches);
+        displayMatches('CDNs (' + cdnMatches.size + ' matches)', cdnMatches);
     }
     else if (cdnMatches.size === 1){
-        displayMatches('CDN :', cdnMatches);
+        displayMatches('CDN (1 match)', cdnMatches);
     }cdnMatches
 
     // Display API matches
     if (apiMatches.size > 1){ 
-        displayMatches('APIs :', apiMatches);
+        displayMatches('APIs (' + apiMatches.size + ' matches)', apiMatches);
     }
     else if (apiMatches.size === 1){
-        displayMatches('API :', apiMatches);
+        displayMatches('API (1 match)', apiMatches);
     }cdnMatches
-
-    // Check for WordPress site
-    if (htmlContent.includes('wp-content')) {
-        const wpDetect = pageUrl + '/wp-json/wp/v2/users';
-        displayMatches('Site WordPress : ', [wpDetect]);
-    }
 
     // Display IP matches
     if (ipMatches.size > 1){ 
-        displayMatches('IPs found on the page :', ipMatches);
+        displayMatches('IPs found on the page (' + ipMatches.size + ' matches)', ipMatches);
     }
     else if (ipMatches.size === 1){
-        displayMatches('IP found on the page :', ipMatches);
+        displayMatches('IP found on the page (1 match)', ipMatches);
     }
-    
-    // Display robots.txt and sitemap links
+
+    // Check for WordPress site
+    if (htmlContent.includes('wp-content')) {
+        const wpUser = pageUrl + '/wp-json/wp/v2/users';
+        const wpContent = pageUrl + '/wp-content';
+        const wpUploads = pageUrl + 'wp-content/uploads';
+        const wpIncludes = pageUrl + '/wp-includes';
+        const wpAdmin = pageUrl + '/wp-admin';
+        const wpReadMe = pageUrl + '/readme.html';
+        const wpLicense = pageUrl + '/license.txt';
+        const wpXmlrpc = pageUrl + '/xmlrpc.php';
+        const wpLogin = pageUrl + '/wp-login.php';
+        const wpSignup = pageUrl + '/wp-signup.php';
+
+        displayMatches('Site WordPress (10 links) ', [wpUser, wpContent, wpUploads, wpIncludes, wpAdmin, wpReadMe, wpLicense, wpXmlrpc, wpLogin, wpSignup]);
+    }
+
+    // Display txt and sitemap links
     const robots = pageUrl + '/robots.txt';
+    const sellers = pageUrl + '/sellers.json';
+    const ads = pageUrl + '/ads.txt';
+    const wellKnownSecurity = pageUrl + '/.well-known/security.txt';
+    const security = pageUrl + '/security.txt';
+    const humans = pageUrl + '/humans.txt';
     const sitemap1 = pageUrl + '/sitemap.xml';
     const sitemap2 = pageUrl + '/sitemap_index.xml';
     const sitemap3 = pageUrl + '/static/assets/sitemap.xml';
-    const sitemapWayback = 'https://web.archive.org/web/*/' + pageUrl + '*';
-    displayMatches('Robots :', [robots]);
-    displayMatches('Sitemaps :', [sitemap1, sitemap2, sitemap3, sitemapWayback]);
+    const sitemap4 = pageUrl + '/sitemap.html';
+    displayMatches('Common txt files (6 links)', [robots, ads, wellKnownSecurity, security, humans, sellers]);
+    displayMatches('Sitemaps (4 links)', [sitemap1, sitemap2, sitemap3, sitemap4]);
 
     // Display certificate link
-    const cert = 'https://crt.sh/?q=' + cleanedDomain + '&exclude=expired&group=none';
-    displayMatches('Certificat :', [cert]);
+    const crt = 'https://crt.sh/?q=' + cleanedDomain + '&exclude=expired&group=none';
+    displayMatches('Certificates (1 link)', [crt]);
 
     // Display whois link
     const whois = 'https://www.whoxy.com/' + cleanedDomain + '#whois';
-    displayMatches('Whois :', [whois]);
+    const whoisHistory1 = 'https://whoisfreaks.com/tools/whois/history/lookup/' + cleanedDomain;
+    displayMatches('Whois (2 links)', [whois, whoisHistory1]);
 
     // Display archive links
-    const archives = 'https://web.archive.org/web/*/' + fullUrl;
-    const saveArchive = 'https://web.archive.org/save/';
-    displayMatches('Archives :', [archives, saveArchive]);
+    const waybackMachine = 'https://web.archive.org/web/*/' + fullUrl;
+    const allurlsWayback = 'https://web.archive.org/web/*/' + pageUrl + '*';
+    const waybackMachineChanges = 'https://web.archive.org/web/changes/' + fullUrl;
+    const archiveToday = 'https://archive.ph/' + fullUrl;
+    const arquivo = 'https://arquivo.pt/url/search?q=' + fullUrl;
+    const libraryOfCongress = 'https://www.loc.gov/web-archives/?q=' + fullUrl;
+
+    displayMatches('Archives (6 links)', [waybackMachine, allurlsWayback,waybackMachineChanges ,archiveToday, arquivo, libraryOfCongress]);
 
     // Display scam detection links
-    const scamDomain = 'https://www.signal-arnaques.com/?q=' + cleanedDomain +'#search-container';
+    const scamWatcher = 'https://www.scamwatcher.com/?q=' + cleanedDomain +'#search-container';
+    const signalArnaques = 'https://www.signal-arnaques.com/?q=' + cleanedDomain +'#search-container';
     const scamDomainDork = 'https://www.google.com/search?q=%22' + cleanedDomain + '%22%20%22Scam%22';
     const scamTrustPilot = 'https://www.trustpilot.com/review/' + cleanedDomain;
-    displayMatches('Scams :', [scamDomainDork,scamDomain,scamTrustPilot])
+    const myWot = 'https://www.mywot.com/scorecard/' + cleanedDomain;
+    displayMatches('Scams (5 links)', [scamDomainDork, signalArnaques, scamWatcher, scamTrustPilot, myWot])
 
     // Display development analysis links
+
+    let parts = tld.split('.');
+    if (parts.length > 1) {
+        parts = parts.reverse();
+    }
+    const tldReversed = parts.join('.');
+
     const siteDork = 'https://www.google.com/search?q=site%3A' + cleanedDomain;
+    const subdomainDork = 'https://www.google.com/search?q=site:*.' + cleanedDomain + '+-site:' + wwwDomain;
     const stackoverflowDork = 'https://www.google.com/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
+    const apacheDork= 'https://www.google.com/search?q=site%3A%2A%2E' + cleanedDomain + '%20intitle%3A%22index%20of%20%2F%22';
+    const subdomainYandex = 'https://yandex.com/search?text=rhost%3A' + tldReversed + domainName + '.*';
+    const traceRoute = 'https://viewdns.info/traceroute/?domain=' + domain;
+    const websiteInformerEmail = 'https://website.informer.com/' + cleanedDomain + '/emails';
+    const skyMem = 'https://www.skymem.info/srch?q=' + cleanedDomain;
+    const leakixNetDomain = 'https://leakix.net/domain/' + cleanedDomain;
+    const threatIntelligence = 'https://threatintelligenceplatform.com/report/' + cleanedDomain;
+    const webCheckSearch = 'https://web-check.xyz/check/' + encodeURIComponent(pageUrl);
+    const wellKnownSearch = 'https://well-known.dev/?q=' + domain + '#results';
     const githubSearchCommits = 'https://github.com/search?q=' + domainName + "&type=commits";
+    const virusTotalSearch = 'https://www.virustotal.com/gui/domain/' + domain + '/relations';
     const shodanSearch = 'https://www.shodan.io/search?query=' + cleanedDomain;
-    const censysSearch = 'https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=' + cleanedDomain;
-    const BGPSearch = 'https://bgp.tools/dns/' + cleanedDomain;
+    const censysSearch = 'https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=100&virtual_hosts=EXCLUDE&q=' + cleanedDomain;
+    const platformCensysSearch = 'https://platform.censys.io/search?q=' + cleanedDomain;
+    const fofaSearch = 'https://en.fofa.info/result?qbase64=' + btoa(cleanedDomain);
+    const bgpToolsSearch = 'https://bgp.tools/dns/' + cleanedDomain;
+    const bgpHeNet = 'https://bgp.he.net/dns/' + cleanedDomain;
     const searchcodeSearch = 'https://searchcode.com/?q=' + domainName;
     const grepAppSearch = 'https://grep.app/search?q=' + domainName;
-    displayMatches('Dev Analysis :', [siteDork, stackoverflowDork, githubSearchCommits, shodanSearch, censysSearch, BGPSearch, searchcodeSearch, grepAppSearch]);
+    displayMatches('Dev Analysis (22 links)', 
+        [siteDork, 
+        subdomainDork, 
+        apacheDork, 
+        subdomainYandex, 
+        traceRoute, 
+        websiteInformerEmail, 
+        skyMem, 
+        leakixNetDomain, 
+        threatIntelligence, 
+        stackoverflowDork, 
+        webCheckSearch, 
+        wellKnownSearch, 
+        githubSearchCommits, 
+        virusTotalSearch, 
+        shodanSearch, 
+        censysSearch, 
+        platformCensysSearch, 
+        fofaSearch, 
+        bgpToolsSearch, 
+        bgpHeNet, 
+        searchcodeSearch, 
+        grepAppSearch]
+    );
+
 
     // Extract and display comments as CSV
-
-
     let comments = extractComments(htmlContent);
     let commentsCSV = commentsToCSV(comments);
     let links = extractLinks(htmlContent);
@@ -4075,132 +4159,252 @@ function matchHTTPEndpoint(testString, pattern) {
 
 // Display matches with a title in the popup content
 function displayMatches(title, matches) {
-    const popupContent = document.getElementById('recon-content');
-    const titleElement = document.createElement('h2');
-    titleElement.textContent = title;
-    popupContent.appendChild(titleElement);
+    const dropdownSection = document.createElement('div');
+    dropdownSection.className = 'dropdown-section';
 
-    // Add a button to open all URLs if the title contains specific keywords
-    if (containsKeywords(title)){
-        const openallurls = document.createElement('button');
-            openallurls.classList.add('open-all');
-            openallurls.addEventListener('click', () => {
-                const children = titleElement.querySelectorAll('*');
-                children.forEach(child => {
-                if (child.tagName === 'A') {
-                    const href = child.getAttribute('href');
-                    if (href) {
-                            browser.tabs.create({url : href});
-                    }
-                }
-                });
-            });
-
-            titleElement.appendChild(openallurls);
+    const defaultExpandedSections = ["Phone", "Social Media", "Email", "API", "IP", "CDN", "Google ID", "Yandex ID", "Top Mail ID", "Simple mail", "Mail without", "Domain only dorks", "Alternative domains", "Scam mail", "Reverse directory", "Username search", "Github", "Area code deduced from TLD :"];
+    if (defaultExpandedSections.some(section => title.includes(section))) {
+        dropdownSection.classList.toggle('active');
     }
 
-    // Display matches as a list
+    const domain = getDomain(pageUrl);
+    const domainName = parseDomain(domain);
+    const subDomain = (domain.replace(domainName, '').slice(0, (domain.replace(domainName, '')).indexOf('.')));
+    const cleanedDomain = subDomain.length <= 1 ? domain : domain.replace(subDomain + '.', '');
+    const tld = cleanedDomain.replace(domainName, '');
+
+    const popupContent = document.getElementById('recon-content');
+    const titleElement = document.createElement('h2');
+    titleElement.className = 'dropdown-title';
+    titleElement.textContent = title;
+
+    if (containsKeywords(title)) {
+        const openallurls = document.createElement('button');
+        openallurls.classList.add('open-all');
+        openallurls.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            const links = dropdownSection.querySelectorAll('a');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href) {
+                    browser.tabs.create({ url: href });
+                }
+            });
+        });
+        titleElement.appendChild(openallurls);
+    }
+
+    const contentElement = document.createElement('div');
+    contentElement.className = 'dropdown-content';
+            let linkElement = document.createElement('a');  
     if (matches.size === 0) {
-        const noMatchesElement = document.createElement('ul');
+        const noMatchesElement = document.createElement('p');
         noMatchesElement.textContent = 'No matches found.';
-        popupContent.appendChild(noMatchesElement);
+        contentElement.appendChild(noMatchesElement);
     } else {
         const listElement = document.createElement('ul');
         matches.forEach(match => {
             const listItem = document.createElement('li');
+            let linkElement = document.createElement('a');          
             if (matchHTTPEndpoint(match, googlePattern)) {
-                const linkElement = document.createElement('a');
                 linkElement.href = match;
-                linkElement.textContent = "Google : " + decodeURIComponent(match.replace("https:\/\/www\.google\.com\/search\?q=", ''));
+                linkElement.textContent = "Google : " + decodeURIComponent(match.replace("https://www.google.com/search?q=", ''));
                 listItem.appendChild(linkElement);
-            }
-            else if (matchHTTPEndpoint(match, httppattern)) {
-                const linkElement = document.createElement('a');
+            } else if (matchHTTPEndpoint(match, yandexPattern)) {
+                linkElement.href = match;
+                linkElement.textContent = "Yandex : " + decodeURIComponent(match.replace("https://yandex.com/search?text=", ''));
+                listItem.appendChild(linkElement);
+            } else if (matchHTTPEndpoint(match, httppattern)) {
                 linkElement.href = match;
                 linkElement.textContent = match;
                 listItem.appendChild(linkElement);
             } else if (matchHTTPEndpoint(match, regexGoogleIds)) {
-                const linkElement = document.createElement('a');
                 linkElement.href = '#';
                 linkElement.textContent = match;
-                linkElement.title = 'Open DNSlytics and PublicWWW for : ' + match;
+                linkElement.title = 'Open DNSlytics, PublicWWW and Builtwith for : ' + match;
                 linkElement.addEventListener('click', (e) => {
                     e.preventDefault();
                     browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
                     browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                });
+                // Add a handler for the middle click
+                linkElement.addEventListener('auxclick', (e) => {
+                    if (e.button === 1) { // Check if the middle button is clicked
+                        e.preventDefault();
+                        browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
+                        browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                        browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                    }
+                });
+                // Add a handler for the right click
+                linkElement.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
+                    browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
                 });
                 listItem.appendChild(linkElement);
             } else if (matchHTTPEndpoint(match, regexGoogleIds)) {
-                const linkElement = document.createElement('a');
                 linkElement.href = '#';
                 linkElement.textContent = match;
-                linkElement.title = 'Open DNSlytics and PublicWWW for : ' + match;
+                linkElement.title = 'Open RapidDNS, DomainTools and VirusTotal for : ' + match;
                 linkElement.addEventListener('click', (e) => {
                     e.preventDefault();
                     browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
                     browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                });
+                linkElement.addEventListener('auxclick', (e) => {
+                    if (e.button === 1) {
+                        e.preventDefault();
+                        browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
+                        browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                        browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                    }
+                });
+                linkElement.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://search.dnslytics.com/search?d=domains&q=' + match });
+                    browser.tabs.create({ url: 'http://publicwww.com/websites/' + match + '+depth%3Aall/' });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
                 });
                 listItem.appendChild(linkElement);
             } else if (matchHTTPEndpoint(match, regexIP)) {
-                const linkElement = document.createElement('a');
-                linkElement.href = 'https://rapiddns.io/s/' + match +'#result';
+                linkElement.href = '#';
                 linkElement.textContent = match;
+                linkElement.title = 'Open RapidDNS, DomainTools and VirusTotal for : ' + match;
+                linkElement.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://rapiddns.io/s/' + match + '#result' });
+                    browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                    browser.tabs.create({ url: 'https://www.virustotal.com/gui/ip-address/' + match });
+                });
+                linkElement.addEventListener('auxclick', (e) => {
+                    if (e.button === 1) {
+                        e.preventDefault();
+                        browser.tabs.create({ url: 'https://rapiddns.io/s/' + match +'#result' });
+                        browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                        browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                    }
+                });
+                linkElement.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://rapiddns.io/s/' + match +'#result' });
+                    browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                });
                 listItem.appendChild(linkElement);
             } else if (matchHTTPEndpoint(match, regexIP)) {
-                const linkElement = document.createElement('a');
-                linkElement.href = 'https://rapiddns.io/s/' + match +'#result';
+                linkElement.href = '#';
+                linkElement.textContent = match;
+                linkElement.title = 'Open RapidDNS, DomainTools and VirusTotal for : ' + match;
+                linkElement.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://rapiddns.io/s/' + match + '#result' });
+                    browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                });
+                linkElement.addEventListener('auxclick', (e) => {
+                    if (e.button === 1) {
+                        e.preventDefault();
+                        browser.tabs.create({ url: 'https://rapiddns.io/s/' + match +'#result' });
+                        browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                        browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                    }
+                });
+                linkElement.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    browser.tabs.create({ url: 'https://rapiddns.io/s/' + match +'#result' });
+                    browser.tabs.create({ url: 'https://reverseip.domaintools.com/search/?q=' + match });
+                    browser.tabs.create({ url: 'https://builtwith.com/relationships/tag/' + match});
+                });
+                listItem.appendChild(linkElement);
+            } else if (matchHTTPEndpoint(match, topMailPattern)) {
+                linkElement.href = 'https://' + domain + '/top.mail.ru-' + match + '.txt';
                 linkElement.textContent = match;
                 listItem.appendChild(linkElement);
-            }
-            else {
+            } else if (matchHTTPEndpoint(match, topMailPattern)) {
+                linkElement.href = 'https://' + domain + '/top.mail.ru-' + match + '.txt';
+                linkElement.textContent = match;
+                listItem.appendChild(linkElement);
+            } else {
+                linkElement.href = '#';
                 listItem.textContent = match;
             }
             listElement.appendChild(listItem);
         });
-        titleElement.appendChild(listElement);
+        contentElement.appendChild(listElement);
+    }
+
+    dropdownSection.appendChild(titleElement);
+    dropdownSection.appendChild(contentElement);
+
+    popupContent.appendChild(dropdownSection);
+
+    titleElement.addEventListener('click', (event) => {
+        event.stopPropagation();
+        dropdownSection.classList.toggle('active');
+    });
+}
+
+
+function createTitleElement(title) {
+    if (title.includes("Area code")) {
+        const paragraphElement = document.createElement('p');
+        paragraphElement.textContent = title;
+        return paragraphElement;
+    } else {
+        const titleElement = document.createElement('h2');
+        titleElement.className = 'dropdown-title';
+        titleElement.textContent = title;
+        return titleElement;
     }
 }
 
-// Display matches with further investigation options
 function displayMatchesWithFurtherInvestigation(title, matches, mode, subtext = false) {
     const popupContent = document.getElementById('recon-content');
-    let titleElement;
+    const defaultExpandedSections = ["Phone", "Social Media", "Email", "API", "IP", "CDN", "Google ID", "Yandex ID", "Top Mail ID", "Simple Mail", "Mail without", "Domain only dorks", "Alternative domains", "Scam mail", "Reverse directory", "Username search", "Github", "Area code deduced from TLD"];
 
-    // Create a title element with appropriate heading level
-    if (subtext) {
-        titleElement = document.createElement('h3');
-    } else {
-        titleElement = document.createElement('h2');
+    const dropdownSection = document.createElement('div');
+    dropdownSection.className = 'dropdown-section';
+
+    if (defaultExpandedSections.some(section => title.includes(section))) {
+        dropdownSection.classList.add('active');
     }
 
+    const titleElement = createTitleElement(title);
 
-    titleElement.textContent = title;
-    popupContent.appendChild(titleElement);
 
-    // Add a button to open all URLs if the title contains specific keywords
-    if (containsKeywords(title)){
+
+    if (containsKeywords(title)) {
         const openallurls = document.createElement('button');
-            openallurls.classList.add('open-all');
-            openallurls.addEventListener('click', () => {
-                const children = titleElement.querySelectorAll('*');
-                children.forEach(child => {
-                if (child.tagName === 'A') {
-                    const href = child.getAttribute('href');
-                    if (href) {
-                            browser.tabs.create({url : href});
-                    }
+    
+        // Worked
+        openallurls.classList.add('open-all');
+        openallurls.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            const links = dropdownSection.querySelectorAll('a');
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href) {
+                    browser.tabs.create({ url: href });
                 }
-                });
             });
+        });
 
-            titleElement.appendChild(openallurls);
+        titleElement.appendChild(openallurls);
     }
 
-    // Display matches as a list with further investigation buttons
+    dropdownSection.appendChild(titleElement);
+
+    const contentElement = document.createElement('div');
+    contentElement.className = 'dropdown-content';
+
     if (matches.size === 0) {
-        const noMatchesElement = document.createElement('li');
+        const noMatchesElement = document.createElement('p');
         noMatchesElement.textContent = 'No matches found.';
-        popupContent.appendChild(noMatchesElement);
+        contentElement.appendChild(noMatchesElement);
     } else {
         const listElement = document.createElement('ul');
         matches.forEach(match => {
@@ -4210,14 +4414,14 @@ function displayMatchesWithFurtherInvestigation(title, matches, mode, subtext = 
                 linkElement.href = match;
                 linkElement.textContent = match;
                 listItem.appendChild(linkElement);
-            }
-            else{
+            } else {
                 listItem.textContent = match;
-
             }
+
             const furtherInvestigationButton = document.createElement('button');
             furtherInvestigationButton.classList.add('further-investigation-button');
-            furtherInvestigationButton.addEventListener('click', () => {
+            furtherInvestigationButton.addEventListener('click', (event) => {
+                event.stopPropagation(); 
                 while (popupContent.firstChild) {
                     popupContent.removeChild(popupContent.firstChild);
                 }
@@ -4227,7 +4431,17 @@ function displayMatchesWithFurtherInvestigation(title, matches, mode, subtext = 
             listItem.appendChild(furtherInvestigationButton);
             listElement.appendChild(listItem);
         });
-        titleElement.appendChild(listElement);
+        contentElement.appendChild(listElement);
+    }
+
+    dropdownSection.appendChild(contentElement);
+
+    popupContent.appendChild(dropdownSection);
+
+    if (titleElement instanceof HTMLHeadingElement) {
+        titleElement.addEventListener('click', (event) => {
+            dropdownSection.classList.toggle('active');
+        });
     }
 }
 
@@ -4241,47 +4455,42 @@ function displayDork(match, title, mode){
     popupContent.appendChild(titleElement);
     popupContent.appendChild(dorkElement);
 
-    // Add a button to open all URLs if the title contains specific keywords
-    if (containsKeywords(title)){
-        const openallurls = document.createElement('button');
-            openallurls.classList.add('open-all');
-            openallurls.addEventListener('click', () => {
-                const children = titleElement.querySelectorAll('*');
-                children.forEach(child => {
-                    // console.log(child)
-                if (child.tagName === 'A') {
-                    const href = child.getAttribute('href');
-                    if (href) {
-                            browser.tabs.create({url : href});
-                    }
-                }
-                });
-            });
-
-            titleElement.appendChild(openallurls);
-    }
-
     // Display different dork searches based on the mode
     if (mode == 1){
-        const atDomain = encodeURIComponent(match.split('@')[1]); // @mail.fr
+        const atDomain = encodeURIComponent('@' + match.split('@')[1]); // @mail.fr
         const nameAt = encodeURIComponent(match.split('@')[0] + '@'); //john.doe@
+        
+        // Simple mail
         const simpleMail = 'https://www.google.com/search?q=%22'+ match + '%22';
         const searchMailWebsites = 'https://www.google.com/search?q=%22'+ match + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
+        const dorkPastebin = 'https://www.google.com/search?q=site%3Apastebin.com "' + match + '"';
         const epieosMail = 'https://epieos.com/?q=' + match + '&t=email';
-        const noDomainMail = 'https://www.google.com/search?q=%22'+ nameAt + '%22';
-        const filetypeDorkMail = 'https://www.google.com/search?q=%22%40'+ match + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
-        const filetypeDorkDomain = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
-        const dorkDomain = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22';
-        const searchDomainWebsites = 'https://www.google.com/search?q=%22%40'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
-        const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%22'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + 'orange.fr%22';
-        const scamMailDork = 'https://www.google.com/search?q=%22' + match + '%22%20%22Scam%22';
         const githubMail = 'https://github.com/search?q=' + match + '&type=commits';
+        const whoxyMail = 'https://www.whoxy.com/search.php?email=' + match;
+        const waybackMachineMailPDF = 'https://web.archive.org/collection-search/pdf/' + match;
+        
+        
+        //No domain mail
+        const noDomainMail = 'https://www.google.com/search?q=%22'+ nameAt + '%22';
+        
+        // Domain only dorks
+        const filetypeDorkMail = 'https://www.google.com/search?q=%22'+ match + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
+        const filetypeDorkDomain = 'https://www.google.com/search?q=%22'+ atDomain + '%22%20filetype%3Apdf%20%7C%20filetype%3Adocx%20%7C%20filetype%3Aodt%20%7C%20filetype%3Atxt';
+        const dorkDomain = 'https://www.google.com/search?q=%22'+ atDomain + '%22';
+        const searchDomainWebsites = 'https://www.google.com/search?q=%22'+ atDomain + '%22%20site%3Arocketreach.co%20%7C%20site%3Acontactout.com%20%7C%20site%3Aaeroleads.com';
+        
+        // Alternative domains
+        const altDomainMail = 'https://www.google.com/search?q=%22'+ nameAt +'gmail.com%22%20%7C%20%22'+ nameAt +'outlook.com%22%20%7C%20%22' + nameAt + 'hotmail.fr%22%20%7C%20%22'  + nameAt + 'yahoo.fr%22%20%7C%20%22' + nameAt + 'free.fr%22%20%7C%20%22' + nameAt + 'orange.fr%22';
+        
+        // Scam mail
+        const scamMailDork = 'https://www.google.com/search?q=%22' + match + '%22%20%22Scam%22';
 
-        displayMatches("Simple Mail :", [simpleMail, searchMailWebsites,filetypeDorkMail,epieosMail,githubMail]);
+
+        displayMatches("Simple mail :", [simpleMail, searchMailWebsites, dorkPastebin, filetypeDorkMail,epieosMail,githubMail, whoxyMail, waybackMachineMailPDF]);
         displayMatches("Mail without domain :", [noDomainMail]);
         displayMatches("Domain only dorks :", [dorkDomain, filetypeDorkDomain, searchDomainWebsites]);
         displayMatches("Alternative domains :", [altDomainMail]);
-        displayMatches("Scam :", [scamMailDork]);
+        displayMatches("Scam mail :", [scamMailDork]);
     }
     else if (mode == 2){
         const reverseDirectory = 'https://www.pagesjaunes.fr/annuaireinverse/recherche?quoiqui=' + encodeURIComponent(match) + '&univers=annuaireinverse';
@@ -4325,9 +4534,12 @@ function displayDork(match, title, mode){
 function containsKeywords(text) {
 
     const keywords = [
-        "Social Medias",
-        "IPs",
-        "Google Ids",
+        "Social Media",
+        "site wordpress",
+        //"IP",
+        //"Google Id",
+        //"Yandex id",
+        "Common txt files",
         "Sitemaps",
         "Scams",
         "Dev Analysis",
@@ -4340,7 +4552,10 @@ function containsKeywords(text) {
         "Referencing",
         "Most used words on the page",
         "Suggested mirror websites",
-
+        "Archives",
+        "Whois",
+        "Certificates",
+        "Alternative domains",
     ];
 
     const regex = new RegExp(keywords.join("|"), "i"); 
@@ -4356,6 +4571,7 @@ const fileTypePatterns = {
     'json': { pattern: 'data:application/json', type: 'code', extension: '.json' },
     'png': { pattern: 'data:image/png', type: 'images', extension: '.png' },
     'jpeg': { pattern: 'data:image/jpeg', type: 'images', extension: '.jpeg' },
+    'webp': { pattern: 'data:image/webp', type: 'images', extension: '.webp' },
     'gif': { pattern: 'data:image/gif', type: 'images', extension: '.gif' },
     'svg': { pattern: 'data:image/svg+xml', type: 'images', extension: '.svg' },
     'pdf': { pattern: 'data:application/pdf', type: 'documents', extension: '.pdf' },
@@ -4369,6 +4585,7 @@ const fileTypePatterns = {
 
 const encodings = [
     'base64',
+    'baseUrl',
     'utf-8',
     'utf-16',
     'ISO-8859-1',
@@ -4380,7 +4597,7 @@ const fileExtensions = {
         '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.txt', '.rtf'
     ],
     images: [
-        '.png', '.jpeg', '.jpg', '.gif', '.svg', '.bmp', '.tiff'
+        '.png', '.jpeg', '.jpg', '.gif', '.svg', '.bmp', '.tiff', '.webp'
     ],
     audio: [
         '.mp3', '.wav', '.ogg', '.aac', '.flac'
@@ -4420,7 +4637,6 @@ function extractComments(htmlContent) {
             comments.push([lineNumber, match]);
         });
     }
-    // console.log(comments);
     return comments;
 }
 

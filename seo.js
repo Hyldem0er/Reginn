@@ -365,6 +365,16 @@ function analyseDomain(urlDomain){
     listElement.appendChild(listItemStatshow);
     popupContent.appendChild(listElement);
 
+    //Semrush
+    const listItemSemrush = document.createElement('li');
+    const linkElementSemrush = document.createElement('a');
+    url = 'https://www.semrush.com/website/' + domain + '/overview/';
+    linkElementSemrush.href = url;
+    linkElementSemrush.textContent = url;
+    listItemSemrush.appendChild(linkElementSemrush);
+    listElement.appendChild(listItemSemrush);
+    popupContent.appendChild(listElement);
+
     //SEO Optimer 
     const listItemSEOOptimer = document.createElement('li');
     const linkElementSEOOptimer = document.createElement('a');
