@@ -4012,7 +4012,7 @@ function analyzeHtml(htmlContent) {
     if (htmlContent.includes('wp-content')) {
         const wpUser = pageUrl + '/wp-json/wp/v2/users';
         const wpContent = pageUrl + '/wp-content';
-        const wpUploads = pageUrl + 'wp-content/uploads';
+        const wpUploads = pageUrl + '/wp-content/uploads';
         const wpIncludes = pageUrl + '/wp-includes';
         const wpAdmin = pageUrl + '/wp-admin';
         const wpReadMe = pageUrl + '/readme.html';
@@ -4078,6 +4078,7 @@ function analyzeHtml(htmlContent) {
     const stackoverflowDork = 'https://www.google.com/search?q=site%3Astackoverflow.com ' + '"' + cleanedDomain + '"';
     const apacheDork= 'https://www.google.com/search?q=site%3A%2A%2E' + cleanedDomain + '%20intitle%3A%22index%20of%20%2F%22';
     const subdomainYandex = 'https://yandex.com/search?text=rhost%3A' + tldReversed + domainName + '.*';
+    const ipThcOrg = 'https://ip.thc.org/#/result?type=SUBD&value=' + cleanedDomain;
     const traceRoute = 'https://viewdns.info/traceroute/?domain=' + domain;
     const websiteInformerEmail = 'https://website.informer.com/' + cleanedDomain + '/emails';
     const skyMem = 'https://www.skymem.info/srch?q=' + cleanedDomain;

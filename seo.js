@@ -429,6 +429,11 @@ function domainCopied(urlDomain){
 
 // Perform SEO analysis on the provided HTML content and URL
 function seo(htmlContent, urlDomain) {
+
+    // Nettoyer l'URL si elle provient de Wayback Machine
+    if (regexWayback.test(urlDomain)) {
+        urlDomain = urlDomain.replace(regexWayback, '');
+    }
     // Extract content from (hopefully) SEO-relevant HTML tags
     const interestingTags = /<(title|meta|h[1-6]|p|a|img|strong|em|b|i|article|section|header|footer|nav|aside|figure|figcaption|blockquote|ul|ol|li|span|div|time|address)[^>]*>(.*?)<\/\1>/gis;
     const interestingContent = htmlContent.match(interestingTags)?.join(' ') || '';
@@ -468,13 +473,16 @@ document.getElementById('seo-checkbox').addEventListener('change', function() {
         document.getElementById('seo-content').classList.remove('hidden');
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const currentTab = tabs[0];
-            const currentUrl = currentTab.url;
+            let currentUrl = currentTab.url;
+            if (regexWayback.test(currentUrl)) {
+                currentUrl = currentUrl.replace(regexWayback, '');
+            }
             chrome.tabs.executeScript({ code: 'document.documentElement.outerHTML' }, (results) => {
                 const htmlContent = results[0];
                 seo(htmlContent, currentUrl);
             });
         });
     }
-    location.reload
+    location.reload;
     document.getElementById('seo-checkbox').checked = true;
 });

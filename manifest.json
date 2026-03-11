@@ -1,17 +1,23 @@
 {
     "manifest_version": 2,
     "name": "Reginn",
-    "version": "3.14",
-  
+    "version": "3.16",
     "description": "Simple OSINT tool to gather data from the source code of a website.",
     "permissions": ["tabs", "activeTab"],
     "icons": {
-      "48": "icons/icon-48.png"
+        "48": "icons/icon-48.png"
     },
-
     "browser_action": {
         "default_icon": "icons/icon-48.png",
         "default_title": "Reginn",
         "default_popup": "popup.html"
+    },
+  "browser_specific_settings": {
+      "gecko": {
+          "id": "{9f5a1399-d6f0-4f17-b493-421cbfe925f2}",
+          "data_collection_permissions": {
+              "required": ["none"]
+          }
       }
   }
+}
