@@ -74,14 +74,19 @@ javascript:(function() {
         }
         else if (currentPage.includes("vk.com")) {
             platform = "VKontakte";
-            displayName = document.querySelector('.page_name')?.textContent.trim() ||
-                        document.querySelector('.page_header')?.textContent.trim() ||
-                        document.querySelector('.page_title')?.textContent.trim() ||
-                        document.querySelector('h2.OwnerPageName')?.textContent.trim() ||
-                        "Not Found";
             var ownerPageNameElement = document.querySelector('h2.OwnerPageName');
-            if (ownerPageNameElement && ownerPageNameElement.id) {
-                userId = ownerPageNameElement.id.replace('public', '').replace('id', '');
+            if (ownerPageNameElement) {
+                displayName = ownerPageNameElement.textContent.trim();
+                displayName = displayName.replace(/\s*last seen.*$/, '').trim();
+            } else {
+                displayName = document.querySelector('.page_name')?.textContent.trim() ||
+                            document.querySelector('.page_header')?.textContent.trim() ||
+                            document.querySelector('.page_title')?.textContent.trim() ||
+                            "Not Found";
+            }
+            var profileAvatarElement = document.querySelector('[id^="profile_avatar_"]');
+            if (profileAvatarElement && profileAvatarElement.id) {
+                userId = profileAvatarElement.id.replace('profile_avatar_', '');
             } else {
                 var metaOgUrl = document.querySelector('meta[property="og:url"]');
                 if (metaOgUrl) {
@@ -91,14 +96,17 @@ javascript:(function() {
                         userId = idMatch[1].replace(/^(id|club)/, '');
                     }
                 }
-                if (userId === "Not Found" || !userId) {
-                    var pathParts = url.pathname.split('/');
+                if (!userId) {
+                    var pathParts = window.location.pathname.split('/');
                     if (pathParts.length > 1) {
                         var idFromUrl = pathParts[1];
                         if (/^(id|club)[\-]?\d+$/.test(idFromUrl)) {
                             userId = idFromUrl.replace(/^(id|club)/, '');
                         }
                     }
+                }
+                if (!userId) {
+                    userId = "Not Found";
                 }
             }
             username = document.querySelector('.page_screen_name')?.textContent.trim() ||
