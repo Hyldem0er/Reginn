@@ -33,7 +33,28 @@ javascript:(function() {
         }
         else if (currentPage.includes("facebook.com")) {
             platform = "Facebook";
-            displayName = document.querySelector('h1.xdj266r.x14z9mp.xat24cr.x1lziwak')?.textContent.trim() || "Not Found";
+            var displayNameElement = document.querySelector('.x14qwyeo');
+            if (displayNameElement) {
+                var clone = displayNameElement.cloneNode(true);
+                var unwantedElement = clone.querySelector('.xad227w');
+                if (unwantedElement) {
+                    unwantedElement.remove();
+                }
+                displayName = clone.textContent.trim();
+            } else {
+                displayName = "Not Found";
+            }
+            var pathParts = window.location.pathname.split('/');
+            if (pathParts.length > 1) {
+                var potentialUsername = pathParts[1];
+                if (potentialUsername !== "profile.php") {
+                    username = potentialUsername;
+                } else {
+                    username = "Not Found";
+                }
+            } else {
+                username = "Not Found";
+            }
             var o = document.documentElement.innerHTML,
                 r = o.match(/"userID":"(\d+)"/);
             userId = r ? r[1] : "Not Found";
@@ -48,7 +69,8 @@ javascript:(function() {
                 ids.push(match[1]);
             }
             userId = ids.length >= 4 ? ids[3] : "Not Found";
-            displayName = document.querySelector('span.x1lliihq.x193iq5w.x6ikm8r.x10wlt62.xlyipyv.xuxw1ft')?.textContent || "Not Found";
+            displayName = document.querySelector('div.x1e56ztr:nth-child(2) > span:nth-child(1)')?.textContent.trim() || "Not Found";
+            username = document.querySelector('h2.x1lliihq > span:nth-child(1)')?.textContent.trim() || "Not Found";
         }
         else if (currentPage.includes("tiktok.com")) {
             platform = "TikTok";
@@ -84,34 +106,50 @@ javascript:(function() {
                             document.querySelector('.page_title')?.textContent.trim() ||
                             "Not Found";
             }
-            var profileAvatarElement = document.querySelector('[id^="profile_avatar_"]');
-            if (profileAvatarElement && profileAvatarElement.id) {
-                userId = profileAvatarElement.id.replace('profile_avatar_', '');
-            } else {
+            var potentialUserId = "Not Found";
+            var pathParts = window.location.pathname.split('/');
+            if (pathParts.length > 1) {
+                var idFromUrl = pathParts[1];
+                if (/^(id|club)?[^-]?\d+$/.test(idFromUrl)) {
+                    potentialUserId = idFromUrl;
+                }
+            }
+            if (potentialUserId === "Not Found") {
+                var profileAvatarElement = document.querySelector('[id^="profile_avatar_"]');
+                if (profileAvatarElement && profileAvatarElement.id) {
+                    potentialUserId = profileAvatarElement.id.replace('profile_avatar_', '');
+                }
+            }
+            if (potentialUserId === "Not Found") {
                 var metaOgUrl = document.querySelector('meta[property="og:url"]');
                 if (metaOgUrl) {
                     var content = metaOgUrl.getAttribute('content');
-                    var idMatch = content.match(/\/((?:id|club)[\-]?\d+)/);
+                    var idMatch = content.match(/\/((?:id|club)?[^-]?\d+)/);
                     if (idMatch) {
-                        userId = idMatch[1].replace(/^(id|club)/, '');
+                        potentialUserId = idMatch[1];
                     }
-                }
-                if (!userId) {
-                    var pathParts = window.location.pathname.split('/');
-                    if (pathParts.length > 1) {
-                        var idFromUrl = pathParts[1];
-                        if (/^(id|club)[\-]?\d+$/.test(idFromUrl)) {
-                            userId = idFromUrl.replace(/^(id|club)/, '');
-                        }
-                    }
-                }
-                if (!userId) {
-                    userId = "Not Found";
                 }
             }
-            username = document.querySelector('.page_screen_name')?.textContent.trim() ||
-                    document.querySelector('[data-test-id="page_screen_name"]')?.textContent.trim() ||
-                    "Not Found";
+            if (potentialUserId !== "Not Found" && !potentialUserId.startsWith('id') && !potentialUserId.startsWith('club')) {
+                userId = 'id' + potentialUserId;
+            } else {
+                userId = potentialUserId;
+            }
+            var scriptElement = document.querySelector('body > script:nth-child(15)');
+            if (scriptElement) {
+                var scriptContent = scriptElement.textContent;
+                var screenNameMatch = scriptContent.match(/"screen_name":"([^"]+)"/);
+                if (screenNameMatch && screenNameMatch[1]) {
+                    username = screenNameMatch[1];
+                } else {
+                    username = "Not Found";
+                }
+            } else {
+                username = "Not Found";
+            }
+            if (username === userId) {
+                username = "Not Found";
+            }
         }
         else if (currentPage.includes("t.me") || currentPage.includes("telegram.me")) {
             platform = "Telegram";
@@ -167,7 +205,6 @@ javascript:(function() {
             showModal("Error", "Not Found", "Not Found", "Not Found", currentPage);
             return;
         }
-
         if (currentPage.includes("instagram.com") && !isPageReloaded) {
             url.searchParams.set('reloaded', 'true');
             history.replaceState(null, null, url.toString());
@@ -321,14 +358,14 @@ javascript:(function() {
             this.style.backgroundColor = '#7c2929';
         };
         copyBtn.onclick = function() {
-            var textToCopy = `${displayName}\n`;
+            var textToCopy = displayName;
             if (username !== "Not Found" && username !== displayName) {
-                textToCopy += `${platform === "Twitter/X" ? "@" + username : username}\n`;
+                textToCopy += `\t${platform === "Twitter/X" ? "@" + username : username}`;
             }
-            if (platform !== "GitHub" && userId !== "Not Available") {
-                textToCopy += `${userId}\n`;
+            if (platform !== "GitHub" && userId !== "Not Available" && userId !== "Not Found") {
+                textToCopy += `\t${userId}`;
             }
-            textToCopy += `${displayUrl.replace(/[?&]reloaded=true(&|$)/, '')}`;
+            textToCopy += `\t${displayUrl.replace(/[?&]reloaded=true(&|$)/, '')}`;
 
             navigator.clipboard.writeText(textToCopy).then(function() {
                 copyBtn.textContent = '✓ Copied!';
