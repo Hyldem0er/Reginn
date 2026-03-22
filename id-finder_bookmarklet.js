@@ -9,11 +9,13 @@ javascript:(function() {
         window.location.href = url.toString();
         return;
     }
+
     try {
         var platform = "",
             userId = "Not Found",
             displayName = "Not Found",
             username = "Not Found";
+
         if (currentPage.includes("twitter.com") || currentPage.includes("x.com")) {
             platform = "Twitter/X";
             var t = document.evaluate(
@@ -31,6 +33,7 @@ javascript:(function() {
                 username = n.mainEntity?.additionalName || "Not Found";
             }
         }
+
         else if (currentPage.includes("facebook.com")) {
             platform = "Facebook";
             var displayNameElement = document.querySelector('.x14qwyeo');
@@ -44,6 +47,7 @@ javascript:(function() {
             } else {
                 displayName = "Not Found";
             }
+
             var pathParts = window.location.pathname.split('/');
             if (pathParts.length > 1) {
                 var potentialUsername = pathParts[1];
@@ -55,10 +59,12 @@ javascript:(function() {
             } else {
                 username = "Not Found";
             }
+
             var o = document.documentElement.innerHTML,
                 r = o.match(/"userID":"(\d+)"/);
             userId = r ? r[1] : "Not Found";
         }
+
         else if (currentPage.includes("instagram.com")) {
             platform = "Instagram";
             var a = document.documentElement.innerHTML,
@@ -72,19 +78,27 @@ javascript:(function() {
             displayName = document.querySelector('div.x1e56ztr:nth-child(2) > span:nth-child(1)')?.textContent.trim() || "Not Found";
             username = document.querySelector('h2.x1lliihq > span:nth-child(1)')?.textContent.trim() || "Not Found";
         }
+
         else if (currentPage.includes("tiktok.com")) {
             platform = "TikTok";
             displayName = document.querySelector('h2[class*="H2ShareSubTitle"]')?.textContent.trim() ||
-                          document.querySelector('h2[class*="ShareSubTitle"]')?.textContent.trim() ||
-                          "Not Found";
+                        document.querySelector('h2[class*="ShareSubTitle"]')?.textContent.trim() ||
+                        "Not Found";
             username = document.querySelector('h1[class*="H1ShareTitle"]')?.textContent.trim() ||
-                       document.querySelector('h1[class*="ShareTitle"]')?.textContent.trim() ||
-                       document.querySelector('div[class*="DivUserTextWrapper"] h1')?.textContent.trim() ||
-                       "Not Found";
-            var c = document.documentElement.innerHTML,
-                r = c.match(/"user":{"id":"(\d+)"/);
-            userId = r ? r[1] : "Not Found";
+                    document.querySelector('h1[class*="ShareTitle"]')?.textContent.trim() ||
+                    document.querySelector('div[class*="DivUserTextWrapper"] h1')?.textContent.trim() ||
+                    "Not Found";
+            var userIdElement = document.querySelector('#ProfilePage');
+            if (userIdElement) {
+                var userIdMatch = userIdElement.textContent.match(/userId=(\d+)/);
+                userId = userIdMatch ? userIdMatch[1] : "Not Found";
+            } else {
+                var scriptContent = document.documentElement.innerHTML;
+                var userIdMatch = scriptContent.match(/"user":{"id":"(\d+)"/);
+                userId = userIdMatch ? userIdMatch[1] : "Not Found";
+            }
         }
+
         else if (currentPage.includes("github.com")) {
             platform = "GitHub";
             var pathParts = url.pathname.split('/');
@@ -94,6 +108,7 @@ javascript:(function() {
                           username;
             userId = "";
         }
+
         else if (currentPage.includes("vk.com")) {
             platform = "VKontakte";
             var ownerPageNameElement = document.querySelector('h2.OwnerPageName');
@@ -106,6 +121,7 @@ javascript:(function() {
                             document.querySelector('.page_title')?.textContent.trim() ||
                             "Not Found";
             }
+
             var potentialUserId = "Not Found";
             var pathParts = window.location.pathname.split('/');
             if (pathParts.length > 1) {
@@ -135,6 +151,7 @@ javascript:(function() {
             } else {
                 userId = potentialUserId;
             }
+
             var scriptElement = document.querySelector('body > script:nth-child(15)');
             if (scriptElement) {
                 var scriptContent = scriptElement.textContent;
@@ -151,6 +168,39 @@ javascript:(function() {
                 username = "Not Found";
             }
         }
+
+        else if (currentPage.includes("snapchat.com")) {
+            platform = "Snapchat";
+            displayName = document.querySelector('.Header_displayNameText__SpYqK')?.textContent.trim() ||
+                          document.querySelector('.Heading_h400Emphasis__SQXxl > span:nth-child(1)')?.textContent.trim() ||
+                          "Not Found";
+            username = document.querySelector('span.Header_desktopSubscriberTextOnMedia__QEFdN:nth-child(1)')?.textContent.trim() ||
+                       document.querySelector('.Heading_h500__7V1g9 > span:nth-child(1)')?.textContent.trim() ||
+                       "Not Found";
+            userId = "Not Available";
+        }
+
+        else if (currentPage.includes("youtube.com")) {
+            platform = "YouTube";
+            if (currentPage.includes("/@") || currentPage.includes("/c/") || currentPage.includes("/user/") || currentPage.includes("/channel/")) {
+                displayName = document.querySelector('.dynamicTextViewModelH1 > span:nth-child(1)')?.textContent.trim() || "Not Found";
+                username = document.querySelector('div.yt-content-metadata-view-model__metadata-row:nth-child(1) > span:nth-child(1) > span:nth-child(1)')?.textContent.trim() || "Not Found";
+                var metaTag = document.querySelector('meta[itemprop="channelId"]');
+                if (metaTag) {
+                    userId = metaTag.getAttribute('content');
+                } else {
+                    var scriptContent = document.documentElement.innerHTML;
+                    var channelIdMatch = scriptContent.match(/"channelId":"([^"]+)"/) ||
+                                        scriptContent.match(/"externalId":"([^"]+)"/) ||
+                                        scriptContent.match(/"UC[0-9A-Za-z_-]{22}"/);
+                    userId = channelIdMatch ? channelIdMatch[1] : "Not Found";
+                }
+            } else {
+                showModal("Error", "Not a YouTube profile page", "Not Found", "Not Found", currentPage);
+                return;
+            }
+        }
+
         else if (currentPage.includes("t.me") || currentPage.includes("telegram.me")) {
             platform = "Telegram";
             var pathParts = url.pathname.split('/');
@@ -160,6 +210,7 @@ javascript:(function() {
                           username;
             userId = username;
         }
+
         else if (currentPage.includes("douyin.com")) {
             platform = "Douyin";
             var pathParts = url.pathname.split('/');
@@ -169,6 +220,7 @@ javascript:(function() {
             var userIdMatch = html.match(/"user_id":\s*"(\d+)"/);
             userId = userIdMatch ? userIdMatch[1] : "Not Found";
         }
+
         else if (currentPage.includes("qq.com")) {
             platform = "QQ";
             var pathParts = url.pathname.split('/');
@@ -178,6 +230,7 @@ javascript:(function() {
             var userIdMatch = html.match(/"uin":\s*(\d+)/);
             userId = userIdMatch ? userIdMatch[1] : "Not Found";
         }
+
         else if (currentPage.includes("ok.ru")) {
             platform = "OK.ru";
             displayName = document.querySelector('h1')?.textContent.trim() || "Not Found";
@@ -190,6 +243,7 @@ javascript:(function() {
                 userId = "Not Found";
             }
         }
+
         else if (currentPage.includes("my.mail.ru")) {
             platform = "Mail.ru";
             var canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -205,193 +259,387 @@ javascript:(function() {
             showModal("Error", "Not Found", "Not Found", "Not Found", currentPage);
             return;
         }
+
         if (currentPage.includes("instagram.com") && !isPageReloaded) {
             url.searchParams.set('reloaded', 'true');
             history.replaceState(null, null, url.toString());
         }
+
         showModal(platform, displayName, userId, username, currentPage);
     }
+    
     catch (err) {
         showModal("Error", "Error fetching data", "Not Found", "Not Found", currentPage);
     }
-    function showModal(platform, displayName, userId, username, url) {
-        var modalBackdrop = document.createElement('div');
-        Object.assign(modalBackdrop.style, {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            zIndex: '99999',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontFamily: 'Arial, sans-serif'
-        });
 
-        var modal = document.createElement('div');
-        Object.assign(modal.style, {
-            backgroundColor: '#242933',
-            color: '#FFF',
-            padding: '0',
-            borderRadius: '10px',
-            width: '90%',
-            maxWidth: '500px',
-            maxHeight: '90vh',
-            overflow: 'hidden',
-            position: 'relative',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-            display: 'flex',
-            flexDirection: 'column'
-        });
-        var header = document.createElement('div');
-        Object.assign(header.style, {
-            backgroundColor: '#7c2929',
-            padding: '12px 20px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderRadius: '10px 10px 0 0'
-        });
-        var title = document.createElement('h2');
-        title.textContent = platform + ' User Details';
-        Object.assign(title.style, {
-            margin: '0',
-            color: '#FFF',
-            fontSize: '18px',
-            fontWeight: '600'
-        });
-        var closeBtn = document.createElement('button');
-        closeBtn.textContent = '×';
-        Object.assign(closeBtn.style, {
-            background: 'none',
-            border: 'none',
-            color: '#FFF',
-            fontSize: '22px',
-            cursor: 'pointer',
-            padding: '0 5px 2px 5px',
-            lineHeight: '1'
-        });
-        closeBtn.onclick = function() {
-            document.body.removeChild(modalBackdrop);
-        };
-        header.appendChild(title);
-        header.appendChild(closeBtn);
-        modal.appendChild(header);
+function showModal(platform, displayName, userId, username, url) {
 
-        var content = document.createElement('div');
-        Object.assign(content.style, {
-            padding: '20px',
-            overflowY: 'auto',
-            flex: '1'
-        });
-        var infoContainer = document.createElement('div');
-        var displayNameDiv = document.createElement('div');
-        displayNameDiv.style.marginBottom = '15px';
-        displayNameDiv.innerHTML = `
-            <div style="color: #ccc; font-size: 14px; margin-bottom: 5px;">Display Name</div>
-            <div style="background: #343a47; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; color: #fff;">${displayName}</div>
-        `;
-        infoContainer.appendChild(displayNameDiv);
+    var modalBackdrop = document.createElement('div');
+    Object.assign(modalBackdrop.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        zIndex: '99999',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'Arial, sans-serif'
+    });
 
-        if (username !== "Not Found" && username !== displayName) {
-            var usernameDiv = document.createElement('div');
-            usernameDiv.style.marginBottom = '15px';
-            usernameDiv.innerHTML = `
-                <div style="color: #ccc; font-size: 14px; margin-bottom: 5px;">Username</div>
-                <div style="background: #343a47; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; color: #fff;">${platform === "Twitter/X" ? "@" + username : username}</div>
-            `;
-            infoContainer.appendChild(usernameDiv);
-        }
+    var modal = document.createElement('div');
+    Object.assign(modal.style, {
+        backgroundColor: '#242933',
+        color: '#FFF',
+        padding: '0',
+        borderRadius: '10px',
+        width: '90%',
+        maxWidth: '500px',
+        maxHeight: '90vh',
+        overflow: 'hidden',
+        position: 'relative',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+        display: 'flex',
+        flexDirection: 'column'
+    });
 
-        if (platform !== "GitHub" && userId !== "Not Available") {
-            var userIdDiv = document.createElement('div');
-            userIdDiv.style.marginBottom = '15px';
-            userIdDiv.innerHTML = `
-                <div style="color: #ccc; font-size: 14px; margin-bottom: 5px;">User ID</div>
-                <div style="background: #343a47; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all; color: #fff;">${userId}</div>
-            `;
-            infoContainer.appendChild(userIdDiv);
-        }
+    var header = document.createElement('div');
+    Object.assign(header.style, {
+        backgroundColor: '#7c2929',
+        padding: '12px 20px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: '10px 10px 0 0'
+    });
 
-        var displayUrl = url.replace(/[?&]reloaded=true(&|$)/, '');
-        var urlDiv = document.createElement('div');
-        urlDiv.style.marginBottom = '15px';
-        urlDiv.innerHTML = `
-            <div style="color: #ccc; font-size: 14px; margin-bottom: 5px;">URL</div>
-            <div style="background: #343a47; padding: 10px; border-radius: 5px; font-family: monospace; word-break: break-all;">
-                <a href="${url}" target="_blank" style="color: #4da6ff; text-decoration: none;">${displayUrl}</a>
-            </div>
-        `;
-        infoContainer.appendChild(urlDiv);
-        content.appendChild(infoContainer);
-        modal.appendChild(content);
-        var footer = document.createElement('div');
-        Object.assign(footer.style, {
-            backgroundColor: '#242933',
-            padding: '15px 20px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderTop: '1px solid #343a47'
-        });
-        var credits = document.createElement('div');
-        credits.innerHTML = '<small style="color: #999;">inspired by <a href="https://tools.myosint.training/" target="_blank" style="color: #4da6ff; text-decoration: none;">tools.myosint.training</a></small>';
-        var buttonContainer = document.createElement('div');
-        var copyBtn = document.createElement('button');
-        copyBtn.textContent = 'Copy Data';
-        Object.assign(copyBtn.style, {
-            backgroundColor: '#7c2929',
-            color: '#FFF',
-            border: 'none',
-            padding: '8px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer',
+    var title = document.createElement('h2');
+    title.textContent = platform + ' User Details';
+    Object.assign(title.style, {
+        margin: '0',
+        color: '#FFF',
+        fontSize: '18px',
+        fontWeight: '600'
+    });
+
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    Object.assign(closeBtn.style, {
+        background: 'none',
+        border: 'none',
+        color: '#FFF',
+        fontSize: '22px',
+        cursor: 'pointer',
+        padding: '0 5px 2px 5px',
+        lineHeight: '1'
+    });
+
+    closeBtn.onclick = function() {
+        document.body.removeChild(modalBackdrop);
+    };
+
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    modal.appendChild(header);
+
+    var content = document.createElement('div');
+    Object.assign(content.style, {
+        padding: '20px',
+        overflowY: 'auto',
+        flex: '1'
+    });
+
+    var infoContainer = document.createElement('div');
+    var displayNameDiv = document.createElement('div');
+    displayNameDiv.style.marginBottom = '15px';
+
+    var displayNameLabel = document.createElement('div');
+    displayNameLabel.textContent = 'Display Name';
+    Object.assign(displayNameLabel.style, {
+        color: '#ccc',
+        fontSize: '14px',
+        marginBottom: '5px'
+    });
+
+    var displayNameValue = document.createElement('div');
+    displayNameValue.textContent = displayName;
+    Object.assign(displayNameValue.style, {
+        background: '#343a47',
+        padding: '10px',
+        borderRadius: '5px',
+        fontFamily: 'monospace',
+        wordBreak: 'break-all',
+        color: '#fff'
+    });
+
+    displayNameDiv.appendChild(displayNameLabel);
+    displayNameDiv.appendChild(displayNameValue);
+    infoContainer.appendChild(displayNameDiv);
+
+    if (username !== "Not Found" && username !== displayName) {
+        var usernameDiv = document.createElement('div');
+        usernameDiv.style.marginBottom = '15px';
+
+        var usernameLabel = document.createElement('div');
+        usernameLabel.textContent = 'Username';
+        Object.assign(usernameLabel.style, {
+            color: '#ccc',
             fontSize: '14px',
-            transition: 'background-color 0.2s'
+            marginBottom: '5px'
         });
-        copyBtn.onmouseover = function() {
-            this.style.backgroundColor = '#9a3a3a';
-        };
-        copyBtn.onmouseout = function() {
-            this.style.backgroundColor = '#7c2929';
-        };
-        copyBtn.onclick = function() {
-            var textToCopy = displayName;
-            if (username !== "Not Found" && username !== displayName) {
-                textToCopy += `\t${platform === "Twitter/X" ? "@" + username : username}`;
-            }
-            if (platform !== "GitHub" && userId !== "Not Available" && userId !== "Not Found") {
-                textToCopy += `\t${userId}`;
-            }
-            textToCopy += `\t${displayUrl.replace(/[?&]reloaded=true(&|$)/, '')}`;
 
-            navigator.clipboard.writeText(textToCopy).then(function() {
-                copyBtn.textContent = '✓ Copied!';
-                setTimeout(function() {
-                    copyBtn.textContent = 'Copy Data';
-                }, 2000);
-            }).catch(function() {
-                var textarea = document.createElement('textarea');
-                textarea.value = textToCopy;
-                textarea.style.position = 'fixed';
-                textarea.style.opacity = '0';
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                copyBtn.textContent = '✓ Copied!';
-                setTimeout(function() {
-                    copyBtn.textContent = 'Copy Data';
-                }, 2000);
-            });
-        };
-        buttonContainer.appendChild(copyBtn);
-        footer.appendChild(credits);
-        footer.appendChild(buttonContainer);
-        modal.appendChild(footer);
-        modalBackdrop.appendChild(modal);
-        document.body.appendChild(modalBackdrop);
+        var usernameValue = document.createElement('div');
+        usernameValue.textContent = platform === "Twitter/X" ? "@" + username : username;
+        Object.assign(usernameValue.style, {
+            background: '#343a47',
+            padding: '10px',
+            borderRadius: '5px',
+            fontFamily: 'monospace',
+            wordBreak: 'break-all',
+            color: '#fff'
+        });
+
+        usernameDiv.appendChild(usernameLabel);
+        usernameDiv.appendChild(usernameValue);
+        infoContainer.appendChild(usernameDiv);
+    } else {
+        var usernameDiv = document.createElement('div');
+        usernameDiv.style.marginBottom = '15px';
+
+        var usernameLabel = document.createElement('div');
+        usernameLabel.textContent = 'Username';
+        Object.assign(usernameLabel.style, {
+            color: '#ccc',
+            fontSize: '14px',
+            marginBottom: '5px'
+        });
+
+        var usernameValue = document.createElement('div');
+        usernameValue.textContent = '';
+        Object.assign(usernameValue.style, {
+            background: '#343a47',
+            padding: '10px',
+            borderRadius: '5px',
+            fontFamily: 'monospace',
+            wordBreak: 'break-all',
+            color: '#fff'
+        });
+
+        usernameDiv.appendChild(usernameLabel);
+        usernameDiv.appendChild(usernameValue);
+        infoContainer.appendChild(usernameDiv);
     }
+
+    if (platform !== "GitHub" && userId !== "Not Available" && userId !== "Not Found") {
+        var userIdDiv = document.createElement('div');
+        userIdDiv.style.marginBottom = '15px';
+
+        var userIdLabel = document.createElement('div');
+        userIdLabel.textContent = 'User ID';
+        Object.assign(userIdLabel.style, {
+            color: '#ccc',
+            fontSize: '14px',
+            marginBottom: '5px'
+        });
+
+        var userIdValue = document.createElement('div');
+        userIdValue.textContent = userId;
+        Object.assign(userIdValue.style, {
+            background: '#343a47',
+            padding: '10px',
+            borderRadius: '5px',
+            fontFamily: 'monospace',
+            wordBreak: 'break-all',
+            color: '#fff'
+        });
+
+        userIdDiv.appendChild(userIdLabel);
+        userIdDiv.appendChild(userIdValue);
+        infoContainer.appendChild(userIdDiv);
+    } else {
+        var userIdDiv = document.createElement('div');
+        userIdDiv.style.marginBottom = '15px';
+
+        var userIdLabel = document.createElement('div');
+        userIdLabel.textContent = 'User ID';
+        Object.assign(userIdLabel.style, {
+            color: '#ccc',
+            fontSize: '14px',
+            marginBottom: '5px'
+        });
+
+        var userIdValue = document.createElement('div');
+        userIdValue.textContent = '';
+        Object.assign(userIdValue.style, {
+            background: '#343a47',
+            padding: '10px',
+            borderRadius: '5px',
+            fontFamily: 'monospace',
+            wordBreak: 'break-all',
+            color: '#fff'
+        });
+
+        userIdDiv.appendChild(userIdLabel);
+        userIdDiv.appendChild(userIdValue);
+        infoContainer.appendChild(userIdDiv);
+    }
+
+    var displayUrl = url.replace(/[?&]reloaded=true(&|$)/, '');
+    var urlDiv = document.createElement('div');
+    urlDiv.style.marginBottom = '15px';
+
+    var urlLabel = document.createElement('div');
+    urlLabel.textContent = 'URL';
+    Object.assign(urlLabel.style, {
+        color: '#ccc',
+        fontSize: '14px',
+        marginBottom: '5px'
+    });
+
+    var urlValue = document.createElement('div');
+    Object.assign(urlValue.style, {
+        background: '#343a47',
+        padding: '10px',
+        borderRadius: '5px',
+        fontFamily: 'monospace',
+        wordBreak: 'break-all'
+    });
+
+    var urlLink = document.createElement('a');
+    urlLink.href = url;
+    urlLink.target = '_blank';
+    urlLink.textContent = displayUrl;
+    Object.assign(urlLink.style, {
+        color: '#4da6ff',
+        textDecoration: 'none'
+    });
+
+    urlValue.appendChild(urlLink);
+    urlDiv.appendChild(urlLabel);
+    urlDiv.appendChild(urlValue);
+    infoContainer.appendChild(urlDiv);
+
+    var platformDiv = document.createElement('div');
+    platformDiv.style.marginBottom = '15px';
+
+    var platformLabel = document.createElement('div');
+    platformLabel.textContent = 'Platform';
+    Object.assign(platformLabel.style, {
+        color: '#ccc',
+        fontSize: '14px',
+        marginBottom: '5px'
+    });
+
+    var platformValue = document.createElement('div');
+    platformValue.textContent = platform;
+    Object.assign(platformValue.style, {
+        background: '#343a47',
+        padding: '10px',
+        borderRadius: '5px',
+        fontFamily: 'monospace',
+        wordBreak: 'break-all',
+        color: '#fff'
+    });
+
+    platformDiv.appendChild(platformLabel);
+    platformDiv.appendChild(platformValue);
+    infoContainer.appendChild(platformDiv);
+    content.appendChild(infoContainer);
+    modal.appendChild(content);
+
+    var footer = document.createElement('div');
+    Object.assign(footer.style, {
+        backgroundColor: '#242933',
+        padding: '15px 20px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderTop: '1px solid #343a47'
+    });
+
+    var credits = document.createElement('div');
+    var creditsText = document.createElement('small');
+    creditsText.style.color = '#999';
+    creditsText.textContent = 'inspired by ';
+
+    var creditsLink = document.createElement('a');
+    creditsLink.href = 'https://tools.myosint.training/';
+    creditsLink.target = '_blank';
+    creditsLink.textContent = 'tools.myosint.training';
+    Object.assign(creditsLink.style, {
+        color: '#4da6ff',
+        textDecoration: 'none'
+    });
+
+    creditsText.appendChild(creditsLink);
+    credits.appendChild(creditsText);
+
+    var buttonContainer = document.createElement('div');
+    var copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copy Data';
+    Object.assign(copyBtn.style, {
+        backgroundColor: '#7c2929',
+        color: '#FFF',
+        border: 'none',
+        padding: '8px 15px',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        fontSize: '14px',
+        transition: 'background-color 0.2s'
+    });
+
+    copyBtn.onmouseover = function() {
+        this.style.backgroundColor = '#9a3a3a';
+    };
+
+    copyBtn.onmouseout = function() {
+        this.style.backgroundColor = '#7c2929';
+    };
+
+    copyBtn.onclick = function() {
+        var textToCopy = displayName;
+        if (username !== "Not Found" && username !== displayName) {
+            textToCopy += "\t" + (platform === "Twitter/X" ? "@" + username : username);
+        } else {
+            textToCopy += "\t";
+        }
+        if (platform !== "GitHub" && userId !== "Not Available" && userId !== "Not Found") {
+            textToCopy += "\t" + userId;
+        } else {
+            textToCopy += "\t";
+        }
+        textToCopy += "\t" + displayUrl.replace(/[?&]reloaded=true(&|$)/, '');
+        textToCopy += "\t" + platform;
+
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            copyBtn.textContent = '✓ Copied!';
+            setTimeout(function() {
+                copyBtn.textContent = 'Copy Data';
+            }, 2000);
+        }).catch(function() {
+            var textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            copyBtn.textContent = '✓ Copied!';
+            setTimeout(function() {
+                copyBtn.textContent = 'Copy Data';
+            }, 2000);
+        });
+    };
+
+    buttonContainer.appendChild(copyBtn);
+    footer.appendChild(credits);
+    footer.appendChild(buttonContainer);
+    modal.appendChild(footer);
+
+    modalBackdrop.appendChild(modal);
+    document.body.appendChild(modalBackdrop);
+}
 })();
